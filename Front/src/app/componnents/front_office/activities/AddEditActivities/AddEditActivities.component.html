@@ -1,0 +1,121 @@
+
+<br>
+<!-- add-edit-activities.component.html -->
+<div class="container mt-5" style="background-color: #FFF8E7; padding: 2rem; border-radius: 15px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+  <h2 class="text-center" style="color: #FF9800;">
+    {{ isViewMode ? 'Détails de l\'activité' : (isEditMode ? 'Modifier l\'activité' : 'Ajouter une activité') }}
+  </h2>
+
+  <form (ngSubmit)="onSubmit()" #activityForm="ngForm">
+    <!-- Titre de l'activité -->
+    <div class="form-group">
+      <label for="title" style="color: #FF9800;">Title</label>
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        [(ngModel)]="activity.title"
+        name="title"
+        required
+        #title="ngModel"
+        style="border-radius: 10px; border: 1px solid #ddd; padding: 10px;"
+        [readonly]="isViewMode"
+      />
+      <div *ngIf="title.invalid && title.touched && !isViewMode" class="text-danger">
+        Le titre est requis.
+      </div>
+    </div>
+
+    <!-- Date de l'activité -->
+    <div class="form-group">
+      <label for="activityDate" style="color: #FF9800 ;">Activity Date</label>
+      <input
+        type="date"
+        id="activityDate"
+        class="form-control"
+        [ngModel]="activity.activityDate"
+        (ngModelChange)="activity.activityDate = $event"
+        name="activityDate"
+        required
+        style="border-radius: 10px; border: 1px solid #ddd; padding: 10px;"
+        [readonly]="isViewMode"
+      />
+      <!-- Affichage de la date formatée pour référence -->
+      <small *ngIf="activity.activityDate" class="text-muted">
+        Format de date: {{activity.activityDate}}
+      </small>
+    </div>
+    
+    <!-- Réputation -->
+    <div class="form-group">
+      <label for="reputation" style="color: #FF9800;">Repetition</label>
+      <input
+        type="number"
+        id="reputation"
+        class="form-control"
+        [(ngModel)]="activity.reputation"
+        name="reputation"
+        required
+        min="0"
+        max="5"
+        style="border-radius: 10px; border: 1px solid #ddd; padding: 10px;"
+        [readonly]="isViewMode"
+      />
+    </div>
+
+    <!-- Durée -->
+    <div class="form-group">
+      <label for="duration" style="color: #FF9800;">Duration (en minutes)</label>
+      <input
+        type="number"
+        id="duration"
+        class="form-control"
+        [(ngModel)]="activity.duration"
+        name="duration"
+        required
+        min="0"
+        style="border-radius: 10px; border: 1px solid #ddd; padding: 10px;"
+        [readonly]="isViewMode"
+      />
+    </div>
+
+    <!-- Type d'activité -->
+    <div class="form-group">
+      <label for="activityType" style="color: #FF9800;">Type of the Activity </label>
+      <select id="activityType" class="form-control" [(ngModel)]="activity.activityType.actTypeId" name="activityType" required style="border-radius: 10px; border: 1px solid #ddd; padding: 10px;" [disabled]="isViewMode">
+        <option *ngFor="let type of activityTypes" [value]="type.actTypeId">
+          {{ type.title }}
+        </option>
+      </select>
+    </div>
+<br>
+    <!-- Boutons soumettre et annuler -->
+    <div class="form-group d-flex" [ngClass]="{'justify-content-between': !isViewMode, 'justify-content-center': isViewMode}">
+      <button
+        type="button"
+        class="btn"
+        style="background-color: #9E9E9E; border: none; color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold;"
+        (click)="router.navigate(['/ListActivity'])">
+        Back
+      </button>
+      
+      <button
+        *ngIf="!isViewMode"
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="activityForm.invalid"
+        style="background-color: #FF9800; border: none; color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold;">
+        {{ isEditMode ? 'Update Activity' : 'Ajouter l\'activité' }}
+      </button>
+      
+      <button
+        *ngIf="isViewMode"
+        type="button"
+        class="btn btn-primary"
+        style="background-color: #FF9800; border: none; color: white; padding: 10px 20px; border-radius: 10px; font-weight: bold; margin-left: 10px;"
+        (click)="router.navigate(['/add-edit', activityId])">
+        Edit
+      </button>
+    </div>
+  </form>
+</div>

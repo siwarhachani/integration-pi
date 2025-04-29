@@ -1,0 +1,53 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <div>
+    <label>Nom :</label>
+    <input class="form-control" type="text" placeholder="Nom du produit" formControlName="name">
+    <div class="text-danger" *ngIf="productForm.controls['name'].invalid && productForm.controls['name'].touched">
+      Le nom est obligatoire.
+    </div>
+  </div>
+
+  
+
+  <div>
+    <label>Description :</label>
+    <textarea class="form-control" placeholder="Description du produit" formControlName="description"></textarea>
+    <div class="text-danger" *ngIf="productForm.controls['description'].invalid && productForm.controls['description'].touched">
+      La description doit avoir au moins 10 caractères.
+    </div>
+  </div>
+
+  <div>
+    <label>Quantité :</label>
+    <input class="form-control" type="number" placeholder="Quantité" formControlName="quantity">
+    <div class="text-danger" *ngIf="productForm.controls['quantity'].invalid && productForm.controls['quantity'].touched">
+      La quantité doit être un nombre positif.
+    </div>
+  </div>
+
+  <div>
+    <label>Prix :</label>
+    <input class="form-control" type="number" placeholder="Prix" formControlName="price">
+    <div class="text-danger" *ngIf="productForm.controls['price'].invalid && productForm.controls['price'].touched">
+      Le prix est requis et doit être positif.
+    </div>
+  </div>
+
+  <div>
+    <label>Image :</label>
+    <input type="file" (change)="onFileSelected($event)" class="form-control">
+  </div>
+  <label for="category">Catégorie</label>
+  <select class="form-control" id="category" formControlName="category">
+    <option value="ALIMENTAIRE">Alimentaire</option>
+    <option value="SPORTIF">Sportif</option>
+    <option value="AUTRE">Autre</option>
+  </select>
+
+  <button type="submit" [disabled]="productForm.invalid || !selectedFile">Ajouter le produit</button>
+
+  <div *ngIf="alertMessage" class="alert alert-warning mt-3">
+    {{ alertMessage }}
+  </div>
+</form>
+

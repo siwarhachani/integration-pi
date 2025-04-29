@@ -1,0 +1,31 @@
+<div *ngIf="meal" class="meal-details-container">
+  <h2 class="meal-title">{{ meal.food }} Details</h2>
+
+  <!-- Quantity Input -->
+  <div class="quantity-container">
+    <label for="quantity" class="quantity-label">Quantity in grams:</label>
+    <input
+      type="number"
+      id="quantity"
+      [(ngModel)]="quantity"
+      min="1"
+      (onclick)="updateMealValues()"
+      
+      (blur)="handleBlur()"
+      class="quantity-input"
+    />
+  </div>
+
+  <!-- Meal Nutritional Information -->
+  <div class="nutritional-info">
+    <p><strong>Calories:</strong> {{ meal.calories }} kcal</p>
+    <p><strong>Protein:</strong> {{ meal.protein }} g</p>
+    <p><strong>Fat:</strong> {{ meal.fat }} g</p>
+    <p><strong>Carbs:</strong> {{ meal.carbs }} g</p>
+    <p><strong>Saturated Fat:</strong> {{ meal.satFat }} g</p>
+    <p><strong>Fiber:</strong> {{ meal.fiber }} g</p>
+  </div>
+
+  <!-- Add Meal Button -->
+  <button (click)="addMeal()" class="add-meal-btn">Add Meal</button>
+</div>

@@ -1,0 +1,88 @@
+<!-- Loading Spinner -->
+<div *ngIf="isLoading" class="d-flex flex-column align-items-center justify-content-center my-5 py-5">
+  <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+  <p class="mt-4 fs-5 text-muted">Loading your profile information...</p>
+</div>
+
+<!-- Update Profile Card -->
+<div *ngIf="!isLoading" class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+    <div class="profile-banner position-relative">
+      <div class="profile-banner-bg"></div>
+
+      <div class="position-absolute top-100 start-50 translate-middle">
+        <ng-container *ngIf="previewUrl; else defaultImage">
+          <img [src]="previewUrl" alt="Profile Preview" class="img-thumbnail rounded-circle shadow-lg"
+               style="width: 150px; height: 150px; object-fit: cover; border: 4px solid white;">
+        </ng-container>
+        <ng-template #defaultImage>
+          <div class="rounded-circle bg-light d-flex align-items-center justify-content-center shadow"
+               style="width: 150px; height: 150px; border: 4px solid white;">
+            <i class="fas fa-user text-muted" style="font-size: 3rem;"></i>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="card-body text-center mt-5 pt-4">
+      <h3 class="fw-bold mb-4">Update Your Profile</h3>
+
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate class="text-start">
+
+        <!-- Profile Picture Upload -->
+        <div class="mb-5 text-center">
+          <label for="profilePictureFile" class="btn btn-outline-primary">
+            <i class="fas fa-camera me-2"></i>Change Photo
+          </label>
+          <input id="profilePictureFile" type="file" accept="image/*" class="d-none" (change)="onFileSelected($event)">
+          <div class="form-text mt-2">JPG or PNG, max size 2MB.</div>
+
+          <button *ngIf="previewUrl" type="button" class="btn btn-link text-danger mt-2" (click)="clearProfilePicture()">
+            <i class="fas fa-times-circle me-1"></i>Remove Photo
+          </button>
+        </div>
+
+        <!-- Form Fields -->
+        <div class="row justify-content-center">
+          <div class="col-md-10">
+
+            <div class="mb-4">
+              <label for="firstName" class="form-label fw-semibold">First Name</label>
+              <input id="firstName" type="text" formControlName="firstName" class="form-control rounded-3"
+                     [ngClass]="{ 'is-invalid': profileForm.get('firstName')?.invalid && (profileForm.get('firstName')?.dirty || profileForm.get('firstName')?.touched) }"
+                     placeholder="Enter your first name">
+              <div class="invalid-feedback">First name must be at least 2 characters.</div>
+            </div>
+
+            <div class="mb-4">
+              <label for="lastName" class="form-label fw-semibold">Last Name</label>
+              <input id="lastName" type="text" formControlName="lastName" class="form-control rounded-3"
+                     [ngClass]="{ 'is-invalid': profileForm.get('lastName')?.invalid && (profileForm.get('lastName')?.dirty || profileForm.get('lastName')?.touched) }"
+                     placeholder="Enter your last name">
+              <div class="invalid-feedback">Last name must be at least 2 characters.</div>
+            </div>
+
+            <div class="mb-4">
+              <label for="birthdate" class="form-label fw-semibold">Birthdate</label>
+              <input id="birthdate" type="date" formControlName="birthdate" class="form-control rounded-3"
+                     [ngClass]="{ 'is-invalid': profileForm.get('birthdate')?.invalid && (profileForm.get('birthdate')?.dirty || profileForm.get('birthdate')?.touched) }">
+              <div class="invalid-feedback">Please select a valid birthdate.</div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid mt-5">
+              <button type="submit" class="btn btn-primary btn-lg rounded-3" [disabled]="profileForm.invalid || isLoading">
+                <i class="fas fa-save me-2"></i>
+                <span *ngIf="!isLoading">Save Changes</span>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                <span *ngIf="isLoading">Updating...</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

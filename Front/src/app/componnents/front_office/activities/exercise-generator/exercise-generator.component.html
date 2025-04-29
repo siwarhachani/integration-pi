@@ -1,0 +1,52 @@
+<div class="exercise-generator">
+  <h2>🎯 Personalized Exercise Generator</h2>
+
+  <div class="form">
+    <div class="form-group">
+      <label for="goal">Goal:</label>
+      <select id="goal" [(ngModel)]="goal" name="goal" required class="form-control">
+        <option [ngValue]="null" disabled>Select your goal</option>
+        <option value="Weight loss">Weight Loss</option>
+        <option value="Muscle Gain">Muscle Gain</option>
+        <option value="Fitness">General Fitness</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="level">Level:</label>
+      <select id="level" [(ngModel)]="level" name="level" required class="form-control">
+        <option [ngValue]="null" disabled>Select your level</option>
+        <option value="débutant">Beginner</option>
+        <option value="intermédiaire">Intermediate</option>
+        <option value="avancé">Advanced</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="timeMinutes">Duration (minutes):</label>
+      <input id="timeMinutes" type="number" [(ngModel)]="timeMinutes" name="timeMinutes" required min="5" placeholder="Enter the session duration" class="form-control" />
+    </div>
+
+    <button (click)="generate()" class="btn-generate">Generate Plan</button>
+  </div>
+
+  <div *ngIf="suggestion" class="result">
+    <h3>🔥 Warm-up:</h3>
+    <ul>
+      <li *ngFor="let item of suggestion.warmup">{{ item }}</li>
+    </ul>
+
+    <h3>🏋️ Workout:</h3>
+    <ul>
+      <li *ngFor="let item of suggestion.workout">{{ item }}</li>
+    </ul>
+
+    <h3>🧘 Cooldown:</h3>
+    <ul>
+      <li *ngFor="let item of suggestion.cooldown">{{ item }}</li>
+    </ul>
+
+    <h4>💡 Advice:</h4>
+    <p>{{ suggestion.advice }}</p>
+  </div>
+</div>

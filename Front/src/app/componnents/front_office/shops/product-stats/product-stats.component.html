@@ -1,0 +1,11 @@
+<h2>Produits en rupture de stock</h2>
+<ul>
+  <li *ngFor="let productName of outOfStockProducts">
+    {{ productName }}
+  </li>
+</ul>
+<div class="container mt-5">
+    <h3>📈 Statistique de remise</h3>
+    <canvas id="discountChart" width="300" height="300"></canvas>
+  </div>
+  

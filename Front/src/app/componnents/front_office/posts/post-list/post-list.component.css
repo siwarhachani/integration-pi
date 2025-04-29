@@ -1,0 +1,54 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Make sure it's on top of everything */
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  z-index: 10000;
+  display: block;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.post-carousel-img {
+  height: 250px;           /* Fixed height */
+  width: 100%;             /* Full width of container */
+  object-fit: cover;       /* Ensures images fill without distortion */
+  transition: opacity 0.6s ease-in-out;
+}
+
+
+.masonry-parent{
+  columns: 2;
+  column-gap: 8px;
+}
+
+.masonry-child {
+  /* Your existing styles */
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 8px;
+  break-inside: avoid; /* Prevents items from breaking across columns */
+}

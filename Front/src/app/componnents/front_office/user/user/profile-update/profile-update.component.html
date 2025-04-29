@@ -1,0 +1,118 @@
+<!-- profile-update.component.html -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0">
+        <div style="background-color: #111827" class="card-header text-white p-4">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-user-edit me-3 fs-3"></i>
+            <h3 class="card-title mb-0 fw-bold">Update Your Profile</h3>
+          </div>
+          <p class="text-light-emphasis mt-2 mb-0">Complete your profile to personalize your experience</p>
+        </div>
+
+        <div class="card-body p-4">
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+
+            <!-- Profile Picture Section -->
+            <div class="mb-4 text-center">
+              <div *ngIf="previewUrl" class="mb-3 position-relative d-inline-block">
+                <img [src]="previewUrl" alt="Profile Preview" class="rounded-circle border border-3 border-light shadow" style="width: 150px; height: 150px; object-fit: cover;">
+                <button type="button" (click)="clearProfilePicture()" class="btn btn-sm btn-light position-absolute top-0 end-0 rounded-circle">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+
+              <div *ngIf="!previewUrl" class="mb-3">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" style="width: 150px; height: 150px;">
+                  <i class="fas fa-user text-secondary" style="font-size: 3rem;"></i>
+                </div>
+              </div>
+
+              <label for="profilePictureFile" class="btn btn-outline-primary">
+                <i class="fas fa-camera me-2"></i>Choose Photo
+              </label>
+              <input id="profilePictureFile" type="file" accept="image/*"
+                     class="form-control d-none"
+                     (change)="onFileSelected($event)">
+              <div class="form-text">Accepted formats: JPG, PNG. Max size: 2MB.</div>
+            </div>
+
+            <div class="row">
+              <!-- First Name -->
+              <div class="col-md-6 mb-3">
+                <label for="firstName" class="form-label fw-medium">First Name</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="fas fa-user text-primary"></i>
+                  </span>
+                  <input id="firstName" formControlName="firstName" type="text"
+                         class="form-control"
+                         placeholder="Enter your first name"
+                         [ngClass]="{
+                           'is-invalid': profileForm.get('firstName')?.invalid &&
+                                        (profileForm.get('firstName')?.touched || profileForm.get('firstName')?.dirty)
+                         }">
+                  <div class="invalid-feedback">
+                    First name is required (minimum 2 characters).
+                  </div>
+                </div>
+              </div>
+
+              <!-- Last Name -->
+              <div class="col-md-6 mb-3">
+                <label for="lastName" class="form-label fw-medium">Last Name</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light">
+                    <i class="fas fa-user-tag text-primary"></i>
+                  </span>
+                  <input id="lastName" formControlName="lastName" type="text"
+                         class="form-control"
+                         placeholder="Enter your last name"
+                         [ngClass]="{
+                           'is-invalid': profileForm.get('lastName')?.invalid &&
+                                        (profileForm.get('lastName')?.touched || profileForm.get('lastName')?.dirty)
+                         }">
+                  <div class="invalid-feedback">
+                    Last name is required (minimum 2 characters).
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Birthdate -->
+            <div class="mb-4">
+              <label for="birthdate" class="form-label fw-medium">Birthdate</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light">
+                  <i class="fas fa-calendar-alt text-primary"></i>
+                </span>
+                <input id="birthdate" formControlName="birthdate" type="date"
+                       class="form-control"
+                       [ngClass]="{
+                         'is-invalid': profileForm.get('birthdate')?.invalid &&
+                                      (profileForm.get('birthdate')?.touched || profileForm.get('birthdate')?.dirty)
+                       }">
+                <div class="invalid-feedback">
+                  Please enter a valid birthdate (YYYY-MM-DD).
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2 mt-4">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="profileForm.invalid || isLoading">
+                <i class="fas fa-save me-2"></i>
+                <span *ngIf="!isLoading">Update Profile</span>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span *ngIf="isLoading"> Updating...</span>
+              </button>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

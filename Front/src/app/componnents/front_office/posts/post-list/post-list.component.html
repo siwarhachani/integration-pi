@@ -1,0 +1,171 @@
+<div class="feed-container">
+  <app-add-post (postCreated)="loadPosts()"></app-add-post>
+
+  <div class="tabs-container mb-3">
+    <div class="feed-tabs">
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'Latest'"
+        (click)="setActiveTab('Latest')"
+      >
+        Latest 🆕
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'HOT'"
+        (click)="setActiveTab('HOT')"
+      >
+        HOT 🔥
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'TOP'"
+        (click)="setActiveTab('TOP')"
+      >
+        TOP🔝
+      </button>
+      <button
+        class="tab-btn search-tab"
+        [class.active]="activeTab === 'Search'"
+        (click)="setActiveTab('Search')"
+      >
+        🔍
+      </button>
+      <button class="tab-btn" (click)="toggleMasonryLayout()">
+        <i class="bi" [class.bi-layout-three-columns]="!isMasonryLayout" [class.bi-layout-columns]="isMasonryLayout"></i>
+        🧱
+      </button>
+      <app-notifications style="margin-right: 1rem"></app-notifications>
+
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'Search'" class="search-bar mb-3">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (keyup)="searchPosts()"
+      class="form-control"
+      placeholder="Search posts..."
+    />
+  </div>
+
+  <div class="posts-list" [class.masonry-parent]="isMasonryLayout">
+    <div *ngFor="let post of (activeTab === 'Search' ? filteredPosts : posts)" class="post-card" [class.masonry-child]="isMasonryLayout">
+      <div class="post-header">
+        <div class="author-info">
+          <img src="https://picsum.photos/40" alt="avatar" class="rounded-circle" />
+          <div>
+            <h6 style="cursor:pointer;" class="author-name" [routerLink]="['/profile', '@' + post.authorUsername]">
+              {{ post.authorUsername || 'User' + (post.id % 100) }}
+            </h6>
+            <span class="post-time">{{ post.createdAt | date: 'short' }}</span>
+          </div>
+        </div>
+        <div class="post-options">
+          <button class="icon-btn">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="post-preview">
+        <div (click)="openPostModal(post.id)">
+          <h5 class="post-title">{{ post.title }}</h5>
+          <p class="post-excerpt">
+            {{
+              stripHtmlTags(post.content).slice(0, 120) +
+              (stripHtmlTags(post.content).length > 120 ? '...' : '')
+            }}
+          </p>
+        </div>
+        <div *ngIf="getImageUrls(post.content).length" class="mb-3">
+          <div id="carousel-{{ post.id }}" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner rounded">
+              <div
+                *ngFor="let imgSrc of getImageUrls(post.content); let i = index"
+                class="carousel-item"
+                [class.active]="i === 0"
+                [attr.data-bs-interval]="3000"
+              >
+                <img [src]="imgSrc" class="d-block w-100 post-carousel-img" alt="Post image" />
+              </div>
+            </div>
+
+
+            <button
+              *ngIf="getImageUrls(post.content).length > 1"
+              class="carousel-control-prev"
+              type="button"
+              [attr.data-bs-target]="'#carousel-' + post.id"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+
+            <button
+              *ngIf="getImageUrls(post.content).length > 1"
+              class="carousel-control-next"
+              type="button"
+              [attr.data-bs-target]="'#carousel-' + post.id"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+
+
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+      <div class="post-engagement">
+        <div class="engagement-actions">
+          <div class="vote-buttons">
+            <button [ngClass]="{ 'text-success': post.userVote === 'UPVOTE' }" class="vote-btn upvote" (click)="voteOnPost(post, 'UPVOTE')">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+            <span class="vote-count">{{ getVoteCount(post) }}</span>
+            <button [ngClass]="{ 'text-danger': post.userVote === 'DOWNVOTE' }" class="vote-btn downvote" (click)="voteOnPost(post, 'DOWNVOTE')">
+              <i class="fas fa-arrow-down"></i>
+            </button>
+          </div>
+          <button class="engagement-btn" (click)="openPostModal(post.id)">
+            <i class="bi bi-chat">💬</i>
+            <span>{{post.commentCount}}</span>
+          </button>
+          <button class="engagement-btn" (click)="copyLink(post.id)">
+            <i class="bi bi-arrow-repeat">🔗</i>
+            <span>Copy link</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div style="display:none;" class="load-more-container mt-3" *ngIf="activeTab === 'Latest' && !allPostsLoaded && posts.length > 0">
+    <button class="btn btn-outline-primary" (click)="loadMorePosts()">Load More</button>
+  </div>
+
+  <div *ngIf="showModal" class="modal-overlay">
+    <div class="modal-wrapper">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content shadow rounded-3">
+          <div class="modal-header">
+            <button type="button" class="btn-close" (click)="closePostModal()"></button>
+          </div>
+          <div class="modal-body p-0">
+            <app-post-modal [post]="selectedPost!" (close)="closePostModal()"></app-post-modal>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

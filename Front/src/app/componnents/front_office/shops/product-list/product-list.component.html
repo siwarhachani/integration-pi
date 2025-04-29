@@ -1,0 +1,74 @@
+
+<div class="container mt-4">
+    <h2>Liste des produits</h2>
+  
+   
+  
+  
+    
+    
+    <!-- Barre de recherche -->
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="🔍 Rechercher un produit..."
+             [(ngModel)]="searchTerm">
+    </div>
+  
+    <!-- Filtre de tri par catégorie -->
+    <div class="mb-3">
+      <label for="category">📂 Filtrer par catégorie :</label>
+      <select id="category" [(ngModel)]="selectedCategory" class="form-control w-auto d-inline-block ms-2">
+        <option value="">Toutes les catégories</option>
+        <option value="ALIMENTAIRE">Alimentaire</option>
+        <option value="SPORTIF">Sportif</option>
+        <option value="AUTRE">Autre</option>
+      </select>
+    </div>
+  
+    <!-- Filtre de tri par prix -->
+    <div class="mb-3">
+      <label for="sort">🔽 Trier par prix :</label>
+      <select id="sort" [(ngModel)]="sortOrder" class="form-control w-auto d-inline-block ms-2">
+        <option value="">Aucun</option>
+        <option value="asc">Prix croissant</option>
+        <option value="desc">Prix décroissant</option>
+      </select>
+    </div>
+    
+    <!-- Affichage des produits -->
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let product of getFilteredAndSortedProducts(); let i = index">
+        <div class="card h-100" style="width: 18rem;">
+          <img [src]="'assets/images/' + getFileName(product.imageUrl)" class="card-img-top" alt="Image du produit">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <p>💰 Prix : {{ product.price }} $</p>
+            <p>📦 Quantité : {{ product.quantity }}</p>
+            <!-- Affichage de la catégorie -->
+            <p>📂 Catégorie : {{ product.category }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <button *ngIf="canDelete()" class="btn btn-danger btn-sm" (click)="deleteProduct(product.id!)">Supprimer</button>
+            <button class="btn btn-primary" (click)="addToCart(product)">Ajouter au panier</button>
+            <a *ngIf="canDelete()"[routerLink]="['/product-update', product.id]" class="btn btn-primary btn-sm">Modifier</a>
+            <button [routerLink]="['/cart']" class="btn btn-primary btn-sm">Voir mon panier</button>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<div class="pagination-buttons">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{currentPage}} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
+    
+  </div>
+  
+  <div class="text-end mb-3">
+    <button  *ngIf="canDelete()" class="btn btn-primary" [routerLink]="['/product-form']">
+      ➕ Ajouter un produit
+    </button>
+  </div>
+  

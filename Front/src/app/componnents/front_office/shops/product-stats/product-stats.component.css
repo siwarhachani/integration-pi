@@ -1,0 +1,40 @@
+/* Styles for the heading */
+h2 {
+    color: #dc3545; /* Bootstrap's danger color for emphasis */
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Styles for the unordered list */
+  ul {
+    list-style-type: disc; /* Use bullet points */
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for each list item */
+  li {
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  /* Styles for the container holding the chart */
+  .container.mt-5 {
+    margin-top: 3rem !important; /* Ensure top margin */
+    text-align: center; /* Center the chart heading */
+  }
+  
+  /* Styles for the chart heading */
+  h3 {
+    color: #007bff; /* Bootstrap's primary color */
+    margin-bottom: 15px;
+  }
+  
+  /* Optional: Style the canvas element directly if needed */
+  #discountChart {
+    /* You can set width and height here as well, but it's often better
+       to set them in the HTML attributes of the <canvas> element */
+    border: 1px solid #eee; /* Example border */
+    background-color: #f8f9fa; /* Light background for the chart area */
+    border-radius: 5px;
+  }

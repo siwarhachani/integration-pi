@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="meeting-container">
+  <h3>{{ isHost ? 'Admin Host' : 'User Guest' }} - Virtual Meeting Room</h3>
+  <p><strong>Room ID:</strong> {{ eventId }}</p>
+
+  <div *ngIf="!hasJoined" class="join-section">
+    <button (click)="joinMeeting()" class="btn btn-warning">Join Meeting</button>
+  </div>
+
+  <div *ngIf="hasJoined" class="video-section d-flex gap-4">
+    <div class="video-box">
+      <h5>You</h5>
+      <video #localVideo autoplay muted playsinline></video>
+    </div>
+    <div class="video-box">
+      <h5>Remote</h5>
+      <video #remoteVideo autoplay playsinline></video>
+    </div>
+  </div>
+
+  <div *ngIf="hasJoined" class="end-call mt-3">
+    <button (click)="endCall()" class="btn btn-danger">End Call</button>
+  </div>
+
+  <div *ngIf="hasJoined" class="chatbox border rounded p-3 mt-4 bg-light shadow-sm">
+    <h5>Chat</h5>
+    <div class="chat-messages mb-2" style="height: 200px; overflow-y: auto;">
+      <div *ngFor="let msg of messages">
+        <strong [style.color]="msg.sender === 'Me' ? 'blue' : msg.sender === 'AI' ? 'green' : 'orangered'">{{ msg.sender }}:</strong>
+        {{ msg.text }}
+      </div>
+    </div>
+
+    <div class="input-group">
+      <input [(ngModel)]="chatInput" class="form-control" placeholder="Type a message..."
+             [disabled]="!isChatReady" (keyup.enter)="sendMessage()" />
+      <button class="btn btn-primary" (click)="sendMessage()"
+              [disabled]="!chatInput.trim() || !isChatReady">Send</button>
+    </div>
+  </div>
+ <!-- 🎙️ Subtitles Block - Live Translation -->
+<div *ngIf="hasJoined && translationHistory.length > 0"
+  class="live-subtitles clay-card p-4 mt-4 rounded-4 shadow-lg text-white"
+  style="background: linear-gradient(to right, #1e1e2f, #2c2c3c); border-left: 5px solid #4facfe;">
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+ <h5 class="mb-0">🎙️ Live Subtitles</h5>
+ <button class="btn btn-sm btn-outline-light" (click)="downloadSRT()">
+   ⬇️ Download SRT
+ </button>
+</div>
+
+<div class="subtitle-line fs-5 fw-semibold px-3 py-2 text-light rounded"
+    style="background: rgba(255,255,255,0.08);">
+ "{{ translationHistory[translationHistory.length - 1] }}"
+</div>
+
+<ul class="list-unstyled mt-3 subtitle-history"
+   style="max-height: 150px; overflow-y: auto;">
+ <li *ngFor="let line of translationHistory"
+     class="small text-secondary ps-2">
+   • {{ line }}
+ </li>
+</ul>
+</div>
+
+
+
+
+  <!-- 📊 Emotion Dashboard only visible for Admin -->
+  <div *ngIf="isHost" class="emotion-dashboard-container mt-4">
+    <app-emotion-dashboard></app-emotion-dashboard>
+  </div>
+
+  <div class="subtitles p-3 bg-dark text-white rounded mt-4">
+    <h5>🎙️ Live Subtitles (EN)</h5>
+    <ul class="list-unstyled">
+      <li *ngFor="let line of translationHistory">{{ line }}</li>
+    </ul>
+    <button class="btn btn-sm btn-outline-light mt-2" (click)="downloadSRT()">⬇️ Download SRT</button>
+  </div>
+  <button (click)="testTranslation()" class="btn btn-primary">Tester Traduction</button>
+
+</div>

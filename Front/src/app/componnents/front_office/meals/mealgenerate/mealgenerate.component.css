@@ -1,0 +1,173 @@
+.category {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: #fdfdfd;
+    border-radius: 12px;
+    border: 1px solid #ffcc80; /* soft orange outline */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+  
+  .category h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ingredient-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .ingredient-container button {
+    background-color: #ffffff;
+    border: 1px solid #ffcc80;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #444;
+    cursor: pointer;
+    min-width: 120px;
+    transition: all 0.2s ease;
+  }
+  
+  .ingredient-container button:hover {
+    background-color: #fff8f0;
+    border-color: #ffb74d;
+  }
+  
+  .ingredient-container button.selected {
+    background-color: #ffcc80;
+    color: #fff;
+    border-color: #ffa726;
+  }
+  
+  .show-more {
+    background: none;
+    border: none;
+    color: #ff9800;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+  
+  .show-more:hover {
+    color: #fb8c00;
+  }
+  
+  .generate-button {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #ffb74d;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .generate-button:hover {
+    background-color: #ffa726;
+  }
+  
+  .generated-output {
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #333;
+  }
+  .generated-output {
+    position: relative;
+    background-color: #fffdf9;
+    border: 1px solid #ffe0b2;
+    border-radius: 12px;
+    padding: 20px 20px 20px 20px;
+    margin-top: 30px;
+    font-size: 14px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #333;
+    white-space: pre-wrap;
+    word-break: break-word;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+  
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffe0b2;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .copy-btn:hover {
+    background-color: #ffcc80;
+  }
+  .generated-output.styled {
+    background: #fffdf9;
+    border: 2px dashed #ffc107;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 16px;
+    font-family: 'Georgia', serif;
+    color: #333;
+    position: relative;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.03);
+  }
+  
+  .recipe-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: 'Cursive', sans-serif;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #e65100;
+  }
+  
+  ul, ol {
+    padding-left: 20px;
+    margin: 10px 0;
+  }
+  
+  .enjoy {
+    text-align: center;
+    font-weight: bold;
+    color: #d84315;
+    margin-top: 30px;
+    font-size: 16px;
+  }
+  
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffe0b2;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  

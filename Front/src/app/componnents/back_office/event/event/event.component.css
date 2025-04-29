@@ -1,0 +1,248 @@
+:root {
+  --bg-light: #fff;
+  --bg-soft: #fff4eb;
+  --accent-orange: #f78a1e;
+  --accent-hover: #e76600;
+  --text-dark: #2a2a2a;
+  --border-soft: #ffd7ba;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --font: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  font-family: var(--font);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}
+
+/* 🧱 Main Container */
+.container {
+  background: var(--bg-soft);
+  border-radius: 25px;
+  padding: 35px;
+  margin: 30px auto;
+  max-width: 900px;
+  box-shadow:
+    inset 5px 5px 12px rgba(255, 255, 255, 0.6),
+    inset -5px -5px 12px rgba(0, 0, 0, 0.02),
+    6px 6px 15px var(--shadow);
+  transition: all 0.3s ease-in-out;
+}
+
+/* 🎯 Headings */
+h2, h3 {
+  color: var(--accent-orange);
+  font-size: 26pt;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 0 #fff2e0;
+}
+
+/* 📝 Form Inputs */
+input.form-control,
+select.form-control,
+textarea.form-control {
+  padding: 12px 20px;
+  font-size: 14pt;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: 2px solid var(--accent-orange);
+  background: #fff;
+  color: var(--text-dark);
+  box-shadow: inset 2px 2px 5px #ffffffb5,
+              inset -2px -2px 5px #ffd8ba60;
+  transition: 0.3s ease-in-out;
+}
+
+input.form-control:focus,
+select.form-control:focus {
+  outline: none;
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 0 4px #ffe0cd;
+}
+
+/* 🏷️ Labels */
+label {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ✅ Buttons (Base) */
+button.btn {
+  font-size: 14pt;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 18px;
+  margin: 5px 10px 10px 0;
+  font-weight: 600;
+  box-shadow: 2px 2px 10px var(--shadow);
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+button.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 2px 4px 12px var(--shadow);
+}
+
+/* 🧡 Add Event (Primary) Button */
+button.btn-primary {
+  background-color: #ff6f3c; /* Strong, wellness orange */
+  color: #ffffff; /* Bright white text */
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: none;
+  padding: 14px 36px;
+  border-radius: 30px;
+  margin-top: 20px;
+  display: inline-block;
+  box-shadow: 0 8px 20px rgba(255, 111, 60, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+button.btn-primary:hover {
+  background-color: #e75a2e;
+  transform: scale(1.05);
+  box-shadow: 0 10px 24px rgba(231, 90, 46, 0.4);
+}
+
+
+/* 🟥 Delete */
+button.btn-danger {
+  background-color: #ff4c4c;
+  color: white;
+}
+
+/* 🟡 Edit */
+button.btn-warning {
+  background-color: #ffbf00;
+  color: #000;
+}
+
+/* 🟢 Launch Virtual Meeting */
+button.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+/* ⚪ Secondary Buttons */
+button.btn-secondary {
+  background-color: #ccc;
+  color: #000;
+}
+
+/* 📋 Events List */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+ul li {
+  background: #fff;
+  padding: 18px 24px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: 2px solid var(--border-soft);
+  box-shadow: inset 2px 2px 5px #ffffffb0,
+              inset -2px -2px 5px #ffb97760;
+  transition: 0.3s ease-in-out;
+}
+
+ul li:hover {
+  background: #fff2e5;
+  transform: translateY(-3px);
+}
+
+/* ☑️ Checkbox */
+input[type="checkbox"] {
+  accent-color: var(--accent-orange);
+  width: 18px;
+  height: 18px;
+}
+
+/* 📏 Utility Spacing */
+.mt-1 { margin-top: 10px; }
+.mt-2 { margin-top: 20px; }
+.mt-4 { margin-top: 40px; }
+
+/* 🎯 Centered Add Button */
+.add-button-wrapper {
+  text-align: center;
+}
+.material-icons {
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+/* 📦 Layout for event list */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ✨ Entry Animation */
+.animate-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🎯 Hover Interaction */
+.event-card {
+  background: #fff;
+  padding: 20px 24px;
+  border-radius: 22px;
+  border: 2px solid var(--border-soft);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.05),
+              inset 3px 3px 6px #fff8f1,
+              inset -2px -2px 5px #fcdcc4;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+@import url("../../template/images/css.css");
+.add-button-wrapper button:hover {
+  transform: scale(1.1);
+  background-color: #ffe9dc;
+  transition: 0.3s;
+}
+
+.add-button-wrapper img {
+  display: block;
+  margin: auto;
+}
+.icon-btn {
+  background-color: #ffeae3;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.icon-btn:hover {
+  background-color: #ffd3c4;
+}
+
+.icon-img {
+  width: 24px;
+  height: 24px;
+}
+

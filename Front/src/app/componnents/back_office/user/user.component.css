@@ -1,0 +1,62 @@
+.dashboard-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  background-color: #f8f9fc;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.chart-box {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-title {
+  font-size: 1.5rem;
+  color: black;
+  margin-bottom: 1.5rem;
+}
+
+.search-bar .input-group {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #dee2e6;
+}
+
+.table {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.table thead th {
+  cursor: pointer;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}

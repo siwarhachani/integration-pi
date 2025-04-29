@@ -1,0 +1,44 @@
+<div class="position-relative" style="z-index: 1050;">
+  <button
+    class="btn btn-light position-relative"
+    (click)="toggleDropdown()"
+    id="notificationBell"
+  >
+    <i class="fas fa-bell"></i>
+    <span
+      *ngIf="notifications.length"
+      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    >
+      {{ notifications.length }}
+    </span>
+  </button>
+
+  <div
+    class="dropdown-menu dropdown-menu-end mt-2 shadow-sm show"
+    *ngIf="dropdownOpen"
+    style="min-width: 300px; max-height: 400px; overflow-y: auto;"
+    aria-labelledby="notificationBell"
+  >
+    <h6 class="dropdown-header">Notifications</h6>
+    <ng-container *ngIf="notifications.length; else noNotifications">
+      <a
+        *ngFor="let n of notifications"
+        class="dropdown-item text-wrap"
+        [routerLink]="['/post', n.relatedPostId]"
+        (click)="dropdownOpen = false"
+      >
+        <strong>{{ n.triggeringUsername }}</strong>
+        <span *ngIf="n.notificationType === 'COMMENT_REPLY'"> replied to your comment</span>
+        <span *ngIf="n.notificationType === 'POST_UPVOTE'"> upvoted your post</span>
+        <span *ngIf="n.notificationType === 'POST_DOWNVOTE'"> downvoted your post</span>
+
+        <span *ngIf="n.notificationType === 'NEW_COMMENT'"> commented on your post</span>
+        <br>
+        <small class="text-muted">{{ n.relatedPostTitle }}</small>
+      </a>
+    </ng-container>
+    <ng-template #noNotifications>
+      <div class="dropdown-item text-muted">No notifications</div>
+    </ng-template>
+  </div>
+</div>

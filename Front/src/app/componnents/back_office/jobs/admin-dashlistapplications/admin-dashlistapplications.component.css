@@ -1,0 +1,91 @@
+table {
+    width: 95%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  @import url(../../template/images/css.css);
+
+  th, td {
+    padding: 15px;
+    text-align: left;
+  }
+  
+  thead {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .thead-dark th {
+    font-weight: bold;
+  }
+  
+  .match-score.green {
+    background-color: #00ef38 !important; /* Green */
+    color: white;
+    font-weight: bold;
+  }
+  
+  .match-score.orange {
+    background-color: #fdc221 !important; /* Orange */
+    color: black;
+    font-weight: bold;
+  }
+  
+  .match-score.red {
+    background-color: #ff1f0f; /* Red */
+    color: white;
+    font-weight: bold;
+  }
+  
+  tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  .pagination-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .pagination {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+  }
+  .page-item {
+    margin: 0 5px;
+  }
+  .page-item.disabled .page-link {
+    pointer-events: none;
+    color: #ccc;
+  }
+  .page-item.active .page-link {
+    font-weight: bold;
+    background-color: #f0ad4e;
+    color: white;
+  }
+  .page-link {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  .pagination-container {
+    margin-top: 20px;
+  }
+  .schedule-btn {
+    background-color: #f69a38; /* blue-600 */
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .schedule-btn:hover {
+    background-color: #efdbc6; /* blue-800 */
+    transform: translateY(-2px);
+  }
+  

@@ -1,0 +1,436 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</head>
+
+<div class="streak-box">
+  🔥 <strong>{{ streakCount }}</strong> day streak!
+</div>
+<div class="track-container">
+  <div class="track-header">
+    <button class="circle-btn" (click)="changeDate(-1)">
+      <i class="fas fa-chevron-left"></i>
+  </button>
+
+    <div class="track-title">
+      <h2>My Track</h2>
+      <div class="track-date">
+        <i class="fas fa-calendar-alt"></i>
+        <span>{{ isToday(selectedDate) ? 'Today' : (selectedDate | date: 'EEE, dd MMMM yyyy') }}</span>
+      </div>
+      
+      <p class="progress-note" *ngIf="weightChangeMessage">{{ weightChangeMessage }}</p>
+
+      <h1 class="calories">{{ getTotalNutrientsForDay().calories }} kcal</h1>
+    </div>
+
+    <button class="circle-btn" (click)="changeDate(1)">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+ 
+  
+  <div class="macros">
+    <div
+      class="macro-item"
+      *ngFor="let macro of macroBreakdown"
+      [ngStyle]="{'--percent': macro.percent, '--color': macro.color}"
+    >
+      <div class="progress-ring">
+        <svg viewBox="0 0 36 36">
+          <path
+            class="circle-bg"
+            d="M18 2.0845
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+          <path
+            class="circle"
+            [attr.stroke-dasharray]="macro.percent + ', 100'"
+            d="M18 2.0845
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+          <text x="18" y="20.35" class="percentage">{{ macro.percent }}%</text>
+        </svg>
+      </div>
+      <p class="macro-label">{{ macro.label }}</p>
+      <p class="macro-grams">{{ macro.grams }}g</p>
+    </div>
+  </div>
+  
+
+
+
+
+
+ 
+
+
+
+  <!-- Meal Categories -->
+  <div class="categories-wrapper">
+    <div *ngFor="let category of mealCategories" class="category-section">
+      <div class="category-header">
+        <h3>{{ category }}</h3>
+        <div class="add-btn-wrapper" (dblclick)="showAddMenu[category] = false" >
+          <button class="add-btn" (click)="toggleAddMenu(category)">
+            <i class="fas fa-plus"></i> Add
+            <i class="fas fa-caret-down"></i>
+          </button>
+        
+          <ul *ngIf="showAddMenu[category]" class="dropdown-menu">
+            <li (click)="navigateToMealList(category)">
+              <i class="fas fa-edit"></i> Add Manually
+            </li>
+            <li (click)="openImageUploadModal(category)">
+              <i class="fas fa-camera"></i> Upload Image
+            </li>
+            
+          </ul>
+        </div>
+        
+        
+      </div>
+
+      <!-- Meal List -->
+      <div *ngIf="filteredMeals(category).length > 0; else noMeals">
+        <ul class="meal-list" style="list-style-type: none;">
+          <li *ngFor="let meal of filteredMeals(category)" class="meal-card">
+            <span class="meal-name">{{ meal.mealName }}</span>
+            <span class="meal-info">{{ meal.calories | number:'1.1-2'  }} kcal · {{ meal.grams| number:'1.1-2'  }}g</span>
+            <span class="meal-macros">{{ meal.carbs | number:'1.1-2'  }}g Carbs | {{ meal.fat| number:'1.1-2'  }}g Fats | {{ meal.protein| number:'1.1-2'  }}g Protein</span>
+            <span class="meal-actions">
+              <button class="icon-btn edit" (click)="openEditModal(meal)" title="Edit">
+                <i class="fas fa-pen"></i>
+              </button>
+              <button 
+              class="icon-btn delete" 
+              (click)="meal.id && deleteMealIntake(meal.id)" 
+              title="Delete">
+             
+            
+                <i class="fas fa-trash"></i>
+              </button>
+            </span>
+          </li>
+        </ul>
+        
+        
+
+        <!-- Totals per category -->
+        <div class="category-totals">
+          <em>Total: {{ getTotalCaloriesForCategory(category) | number:'1.1-2'  }} kcal |
+            {{ getTotalCarbsForCategory(category)| number:'1.1-2'  }}g Carbs |
+            {{ getTotalFatsForCategory(category)| number:'1.1-2'  }}g Fats |
+            {{ getTotalProteinForCategory(category)| number:'1.1-2'  }}g Protein
+          </em>
+        </div>
+      </div>
+
+      <!-- No meals fallback -->
+      <ng-template #noMeals>
+        <p class="no-meals">No meals logged for {{ category }} on {{ selectedDate | date: 'longDate' }}.</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Complete Day Button -->
+  <div class="footer-actions" style="position: relative;">
+    <button 
+      class="complete-btn" 
+      (click)="onCompleteDay()">
+      <i class="fas fa-check-circle"></i> Complete Day
+    </button>
+  
+    <div *ngIf="showClap" class="clap-popup">
+      👏
+      <div class="fireworks"></div>
+      <div class="fireworks delay"></div>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+
+<!-- Modal for editing meal -->
+<div *ngIf="selectedMealForEdit" class="modal" [ngClass]="{'show': selectedMealForEdit}">
+  <!-- Modal Backdrop -->
+  <div class="modal-backdrop" (click)="closeEditModal()"></div> <!-- Clicking backdrop closes the modal -->
+  
+  <!-- Modal Content -->
+  <div class="modal-content">
+    <h2>Edit Meal</h2>
+    
+    <!-- Meal Edit Form -->
+    <form (ngSubmit)="submitUpdatedMeal()">
+      <label>Meal Name:</label>
+      <input [(ngModel)]="selectedMealForEdit.mealName" name="mealName" readonly type="text" />
+
+      <label>Category:</label>
+      <select [(ngModel)]="selectedMealForEdit.category" name="category" required>
+        <option *ngFor="let cat of mealCategories" [value]="cat">{{ cat }}</option>
+      </select>
+
+      <label>Calories:</label>
+      <input type="number" [(ngModel)]="selectedMealForEdit.calories" name="calories" readonly min="1.1" max="2" step="0.01" />
+
+      <label>Grams:</label>
+      <input type="number" [(ngModel)]="selectedMealForEdit.grams" name="grams" required min="1.1" max="2" step="0.01"/>
+
+      <label>Carbs:</label>
+      <input type="number" [(ngModel)]="selectedMealForEdit.carbs" name="carbs" readonly min="1.1" max="2" step="0.01" />
+
+      <label>Fat:</label>
+      <input type="number" [(ngModel)]="selectedMealForEdit.fat" name="fat" readonly min="1.1" max="2" step="0.01" />
+
+      <label>Protein:</label>
+      <input type="number" [(ngModel)]="selectedMealForEdit.protein" name="protein" readonly  min="1.1" max="2" step="0.01"/>
+
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="selectedMealForEdit.date" name="date" readonly min="1.1" max="2" step="0.01"/>
+
+      <!-- Modal Buttons -->
+      <div class="modal-buttons">
+        <button type="submit" class="save-btn">
+          <i class="fas fa-save"></i> Update
+        </button>
+        <button type="button" (click)="closeEditModal()" class="cancel-btn">
+          <i class="fas fa-times-circle"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+<!-- Button to Trigger Edit Modal -->
+
+
+<!-- Summary & Calculations Buttons -->
+<div class="summary-bar-container">
+  <button class="summary-btn" (click)="showNutritionModal = true">
+    <i class="fas fa-chart-pie"></i> Summary
+  </button>
+
+  <button class="summary-btn" (click)="showCalculationsModal = true">
+    <i class="fas fa-chart-pie"></i> Calculations
+  </button>
+</div>
+
+<!-- Nutrition Modal -->
+<div *ngIf="showNutritionModal" class="nutrition-modal">
+  <div class="modal-backdrop" (click)="showNutritionModal = false"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Nutrition Summary</h3>
+      <button (click)="showNutritionModal = false" class="close-modal-btn" title="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Chart Tabs -->
+    
+<nav class="chart-tabs">
+<button 
+  [class.active]="selectedChartTab === 'pie'" 
+  (click)="selectedChartTab = 'pie'" 
+  class="chart-tab-btn">
+  <i class="fas fa-chart-pie"></i> Pie
+</button>
+<button 
+  [class.active]="selectedChartTab === 'category'" 
+  (click)="selectedChartTab = 'category'" 
+  class="chart-tab-btn">
+  <i class="fas fa-utensils"></i> By Meal
+</button>
+<button 
+  [class.active]="selectedChartTab === 'bar'" 
+  (click)="selectedChartTab = 'bar'" 
+  class="chart-tab-btn">
+  <i class="fas fa-chart-bar"></i> Macros
+</button>
+</nav>
+
+
+    <!-- Chart Panels -->
+    <div *ngIf="selectedChartTab === 'pie'">
+      <h4>Macronutrient Breakdown</h4>
+      <canvas baseChart [data]="macroChartData" [type]="'pie'"></canvas>
+      <ul class="chart-legend">
+        <li *ngFor="let item of macroBreakdown" [style.color]="item.color">
+          {{ item.label }}: {{ item.grams }}g ({{ item.percent }}%)
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="selectedChartTab === 'category'">
+      <h4>Calories % by Meal Type</h4>
+      <canvas baseChart [data]="categoryChartData" [options]="categoryChartOptions" [type]="'bar'"></canvas>
+    </div>
+
+   
+
+    <div *ngIf="selectedChartTab === 'bar'">
+      <h4>Macronutrients in Grams</h4>
+      <canvas baseChart [data]="macroBarData" [options]="macroBarOptions" [type]="'bar'"></canvas>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+<!-- Calculations Modal -->
+<div *ngIf="showCalculationsModal" class="nutrition-modal light-theme">
+  <div class="modal-backdrop" (click)="showCalculationsModal = false"></div>
+  <div class="modal-content">
+    <!-- Modal Header -->
+    <div class="modal-header navbar">
+      <h3><i class="fas fa-heartbeat"></i> Health Calculations</h3>
+      <button (click)="showCalculationsModal = false" class="close-modal-btn" title="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Results -->
+    <div class="calculation-results">
+      <!-- BMR -->
+      <div class="calculation-item">
+        <h4><i class="fas fa-fire"></i> BMR</h4>
+        <p class="value">{{ bmr | number:'1.0-2' }} kcal/day</p>
+        <p class="description">Minimum calories needed for basic body functions.</p>
+      </div>
+
+      <!-- TDEE -->
+      <div class="calculation-item">
+        <h4><i class="fas fa-bolt"></i> TDEE</h4>
+        <p class="value">{{ tdee | number:'1.0-2' }} kcal/day</p>
+        <p class="description">Estimated daily calorie usage based on activity.</p>
+      </div>
+
+      <!-- BMI -->
+      <div class="calculation-item">
+        <h4><i class="fas fa-weight"></i> BMI</h4>
+        <p class="value">{{ bmi | number:'1.1-2' }}</p>
+        <div class="bmi-bar-container">
+          <div class="bmi-bar">
+            <div class="bmi-indicator" [style.left.%]="getBMIPercent(bmi)"></div>
+          </div>
+          <div class="bmi-labels">
+            <span>Underweight</span>
+            <span>Normal</span>
+            <span>Overweight</span>
+            <span>Obese</span>
+          </div>
+        </div>
+        <p class="bmi-category">{{ bmiCategory }}</p>
+      </div>
+      <div class="calculation-item">
+        <h4>Ideal Weight</h4>
+        <p>{{ idealWeight | number:'1.1-2' }} kg</p>
+        <p>Your optimal weight based on a healthy BMI of 22</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Daily Calories Line Chart 
+<div *ngIf="dailyProgressLineChartData?.datasets?.length">
+  <canvas 
+    baseChart 
+    [data]="dailyProgressLineChartData" 
+    [options]="dailyProgressChartOptions" 
+    [type]="'line'">
+  </canvas>
+</div>-->
+<!-- index.html -->
+
+<div class="body-container">
+  <div class="image-wrapper">
+    <img src="../../../../../assets/front_office/assets/images/body1.png" alt="Body Silhouette" class="body-image" />
+    <div class="description-popup">
+      <div class="popup-content">
+        <ul class="body-composition-list">
+          <li class="highlight muscle">💪 <strong>Muscle:</strong> {{ muscleMass |number:'1.0-2' }}%</li>
+          <li class="highlight fat">🧈 <strong>Fat:</strong> {{ bodyFat |number:'1.0-2'}}%</li>
+          <li class="highlight bone">🦴 <strong>Bone:</strong> {{ boneMass |number:'1.0-2'}}%</li>
+          <li class="highlight water">💧 <strong>Water:</strong> {{ waterMass |number:'1.0-2' }}%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="summary-bar-container">
+  <button class="summary-btn" routerLink="/eat">
+     Eat this much
+  </button>
+
+  <button class="summary-btn" routerLink="/generate">
+     Meals
+  </button>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Image Upload Modal -->
+<div *ngIf="showImageUploadModal" class="image-upload-modal">
+  <div class="modal-backdrop" (click)="showImageUploadModal = false"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Select an Image for {{ selectedCategory }}</h3>
+      <button (click)="showImageUploadModal = false" class="close-modal-btn" title="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+     
+      <input type="file" id="fileUpload" (change)="handleFileSelect($event)" hidden>
+      <label for="fileUpload" class="custom-upload-btn">Choose File</label>
+
+      <div class="file-name" *ngIf="selectedFileName">{{ selectedFileName }}</div>
+      <div><label (click)="uploadImage()" class="custom-upload-btn">Analyze</label></div>
+      
+
+      <div *ngFor="let ingredient of ingredients" class="meal-details-container" >
+        <h2 class="meal-title">{{ ingredient.food }} Details</h2>
+      
+      
+        <!-- Nutritional Information -->
+        <div class="nutritional-info">
+          <p>{{ingredient.category}}</p>
+          <p><strong>Quantity: </strong> {{ ingredient.measure }} </p>
+          <p><strong>Calories:</strong> {{ ingredient.calories }} kcal</p>
+          <p><strong>Protein:</strong> {{ ingredient.protein }} g</p>
+          <p><strong>Fat:</strong> {{ ingredient.fat }} g</p>
+          <p><strong>Carbs:</strong> {{ ingredient.carbs }} g</p>
+          <p><strong>Saturated Fat:</strong> {{ ingredient.satFat }} g</p>
+          <p><strong>Fiber:</strong> {{ ingredient.fiber }} g</p>
+        </div>
+      
+        <!-- Add Button -->
+        <button (click)="addMeal(ingredient)" class="add-meal-btn">Add Meal</button>
+      </div>
+      <button (click)="addAllMeals(ingredients!)" class="custom-upload-btn" style="margin-top: 20px;">Add All</button>
+
+
+    </div>
+  </div>
+</div>
+
+
+

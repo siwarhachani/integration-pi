@@ -1,0 +1,187 @@
+/* General Styles */
+@import url(../../template/images/css.css);
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: auto;
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  color: #444;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background: #ff8400;
+  color: white;
+}
+
+thead th {
+  padding: 10px;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Buttons */
+button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.btn-add {
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  background: #ff8400;
+  color: white;
+}
+
+/* Forms */
+.job-form, .edit-form {
+  background: #f9f9f9;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+form input, form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+form button {
+  background: #007bff;
+  color: white;
+  margin-top: 10px;
+}
+
+/* Alerts */
+.alert {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.pagination-container {
+  margin-top: 20px;
+  text-align: center;
+}
+.pagination {
+  display: inline-flex;
+  list-style: none;
+  padding: 0;
+}
+.page-item {
+  margin: 0 5px;
+}
+.page-item.disabled .page-link {
+  pointer-events: none;
+  color: #ccc;
+}
+.page-item.active .page-link {
+  font-weight: bold;
+  background-color: #f0ad4e;
+  color: white;
+}
+.page-link {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.pagination-container {
+  margin-top: 20px;
+}
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific styles for Edit and Delete buttons */
+button.edit-btn {
+  background: linear-gradient(135deg, #ff8400, #fe9900);
+  color: #fff;
+}
+
+button.edit-btn:hover {
+  background: linear-gradient(135deg, #c58423, #fe9900);
+  transform: translateY(-2px);
+}
+
+button.delete-btn {
+  background: linear-gradient(135deg, #e74c3c, #ec7063);
+  color: #fff;
+}
+
+button.delete-btn:hover {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  transform: translateY(-2px);
+}
+.action-buttons {
+  display: flex;
+  gap: 5px; /* Space between buttons */
+}
+
+button {
+  padding: 6px 10px;
+  font-size: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.8;
+}

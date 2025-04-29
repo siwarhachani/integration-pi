@@ -1,0 +1,123 @@
+.custom-bg {
+  background: linear-gradient(to right, #e2e8f0, #e5e7eb);
+}
+
+.custom-btn:hover {
+  background-color: #f3e8ff !important;
+  transition: background-color 0.3s ease-in-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  .custom-bg {
+    background: linear-gradient(to right, #1f2937, #111827);
+    color: white !important;
+  }
+
+  .custom-btn {
+    background-color: #374151 !important;
+    color: white !important;
+  }
+
+  .custom-btn:hover {
+    background-color: #4b5563 !important;
+  }
+}
+
+.btn-login{
+  color: white;
+  outline: 0;
+  grid-gap: 8px;
+  align-items: center;
+  background: seagreen;
+  border: 1px solid seagreen;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 16px;
+  gap: 8px;
+  justify-content: center;
+  line-height: 1.5;
+  overflow: hidden;
+  padding: 12px 16px;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  transition: all .14s ease-out;
+  white-space: nowrap;
+  margin-left: 7px;
+  margin-right: 10px;
+
+}
+
+
+.btn-login:hover {
+  box-shadow: 4px 4px 0 #000;
+  transform: translate(-4px,-4px);
+}
+
+.btn-login:focus-visible{
+  outline-offset: 1px;
+}
+
+.nav-link {
+  color: orangered; /* Default link color */
+  text-decoration: none; /* Remove underline */
+  position: relative; /* For underline animation */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.nav-link:hover {
+  color: orangered; /* Change color on hover */
+}
+
+/* Underline animation on hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: orangered; /* Underline color */
+  bottom: -5px;
+  left: 0;
+  transition: width 0.3s ease; /* Smooth underline animation */
+}
+
+.nav-link:hover::after {
+  width: 100%; /* Expand underline on hover */
+}
+
+.btn-register{
+  color: white;
+  outline: 0;
+  grid-gap: 8px;
+  align-items: center;
+  background: midnightblue;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 16px;
+  gap: 8px;
+  justify-content: center;
+  line-height: 1.5;
+  overflow: hidden;
+  padding: 12px 16px;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  transition: all .14s ease-out;
+  white-space: nowrap;
+  margin-left: 7px;
+  margin-right: 10px;
+
+}
+
+
+.btn-register:hover {
+  box-shadow: 4px 4px 0 #000;
+  transform: translate(-4px,-4px);
+}
+
+.btn-register:focus-visible{
+  outline-offset: 1px;
+}

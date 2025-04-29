@@ -1,0 +1,144 @@
+:root {
+  --bg-light: #fff;
+  --bg-soft: #fff4eb;
+  --accent-orange: #f78a1e;
+  --accent-hover: #e76600;
+  --text-dark: #2a2a2a;
+  --border-soft: #ffd7ba;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --font: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  font-family: var(--font);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background: var(--bg-soft);
+  border-radius: 25px;
+  padding: 35px;
+  margin: 30px auto;
+  max-width: 900px;
+  box-shadow:
+    inset 5px 5px 12px rgba(255, 255, 255, 0.6),
+    inset -5px -5px 12px rgba(0, 0, 0, 0.02),
+    6px 6px 15px var(--shadow);
+  transition: all 0.3s ease-in-out;
+}
+
+h2, h4 {
+  color: var(--accent-orange);
+  font-size: 26pt;
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 0 #fff2e0;
+}
+
+input.form-control {
+  padding: 12px 20px;
+  font-size: 14pt;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: 2px solid var(--accent-orange);
+  background: #fff;
+  color: var(--text-dark);
+  box-shadow: inset 2px 2px 5px #ffffffb5,
+              inset -2px -2px 5px #ffd8ba60;
+  transition: 0.3s ease-in-out;
+}
+
+input.form-control:focus {
+  outline: none;
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 0 4px #ffe0cd;
+}
+
+/* Global Button Style */
+/* Unified Button Style (slightly rounded rectangle) */
+button {
+  font-size: 14px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px; /* ⬅️ softer, not full pill */
+  font-weight: bold;
+  color: white;
+  background-color: #ffa500; /* orange */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  margin: 5px;
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #e69500; /* slightly darker on hover */
+  transform: translateY(-2px);
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Specific types (optional) */
+.btn-success, .btn-warning, .btn-danger, .btn-primary, .btn-secondary {
+  background-color: #ffa500;
+  color: white;
+  border: none;
+}
+
+
+/* Optional: make sure Edit/Delete also match */
+button.btn-warning,
+button.btn-danger {
+  background-color: #ffa500;
+  color: white;
+}
+
+
+.material-icons {
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* UL List */
+ul.list-group {
+  padding: 0;
+  margin-top: 30px;
+}
+
+ul.list-group li {
+  background: #fff;
+  padding: 18px 24px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: 2px solid var(--border-soft);
+  box-shadow: inset 2px 2px 5px #ffffffb0,
+              inset -2px -2px 5px #ffb97760;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+}
+
+ul.list-group li:hover {
+  background: #fff2e5;
+  transform: translateY(-3px);
+}
+
+/* Animation */
+.animate-in {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@import url("../../template/images/css.css");
+

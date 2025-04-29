@@ -1,0 +1,255 @@
+/* 💡 Base */
+:host {
+    display: block;
+    background-color: #fff3e6;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
+  
+  /* 🧱 Grid principal */
+  .main-container {
+    display: flex;
+    height: 100%;
+  }
+  
+  /* 🎥 Section vidéo */
+  .video-section {
+    flex: 3;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    gap: 20px;
+    overflow-y: auto;
+  }
+  
+  .video-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 280px;
+    height: 220px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(255, 102, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  video {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background-color: #000;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .video-card small {
+    padding: 8px;
+    font-weight: bold;
+    color: #ff6600;
+  }
+  
+  /* 💬 Chat section */
+  .chat-section {
+    flex: 1;
+    border-left: 2px solid #ff6600;
+    background-color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-header {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ff6600;
+  }
+  
+  .chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  .chat-messages .msg {
+    margin-bottom: 8px;
+  }
+  
+  .chat-messages .msg strong {
+    color: #ff6600;
+    display: block;
+    margin-bottom: 2px;
+  }
+  
+  .chat-messages .msg span {
+    background: #fce6d4;
+    padding: 6px 10px;
+    border-radius: 15px;
+    display: inline-block;
+    max-width: 80%;
+  }
+  
+  /* 📥 Input */
+  .chat-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    border-radius: 20px;
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+  }
+  
+  .chat-input button {
+    border-radius: 20px;
+    background-color: #ff6600;
+    border: none;
+    color: white;
+    padding: 0 20px;
+    font-weight: 600;
+  }
+  
+  /* 🔘 Bottom bar */
+  .bottom-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
+    padding: 10px 20px;
+    display: flex;
+    gap: 20px;
+    z-index: 1000;
+  }
+  
+  .bottom-bar button {
+    border: none;
+    background: none;
+    font-size: 22px;
+    color: #ff6600;
+    cursor: pointer;
+  }
+  
+  .bottom-bar .end-btn {
+    color: #fff;
+    background-color: #ff4d4d;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  
+  /* 🎯 Responsive */
+  @media (max-width: 768px) {
+    .main-container {
+      flex-direction: column;
+    }
+  
+    .chat-section {
+      border-left: none;
+      border-top: 2px solid #ff6600;
+      height: 300px;
+    }
+  
+    .video-section {
+      flex: none;
+      height: calc(100vh - 300px - 80px);
+      overflow-y: auto;
+    }
+  }
+  .emotion-dashboard-container {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .live-subtitles {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    max-width: 600px;
+    margin: auto;
+    border: 1px solid #444;
+  }
+  
+  .subtitle-line {
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding: 10px 0;
+  }
+  .live-subtitles-container {
+    background-color: #1e1e2f;
+    border-radius: 12px;
+    padding: 20px;
+    color: #f1f1f1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .live-subtitles-header h5 {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .live-subtitles-box {
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-top: 10px;
+  }
+  
+  .subtitle-line {
+    padding: 6px 12px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-left: 3px solid #ffca28;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .subtitle-line:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .clay-card {
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(0,0,0,0.3),
+                -4px -4px 10px rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+  }
+  
+  .subtitle-line {
+    transition: all 0.3s ease-in-out;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .subtitle-history::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  .subtitle-history::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+  }
+  .subtitle-history::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  

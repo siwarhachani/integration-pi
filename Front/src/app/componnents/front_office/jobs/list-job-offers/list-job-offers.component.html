@@ -1,0 +1,160 @@
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+ integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<!-- Add a spacer -->
+<div class="my-100"></div>
+<!-- Hero Section / Intro Banner -->
+<div class="hero-banner text-center text-md-start my-5 p-5 bg-light rounded-4 position-relative overflow-hidden">
+  <div class="hero-text">
+    <h1 class="fw-bold display-4">Our Available Job Offers</h1>
+    <p class="lead text-muted mt-3">Discover a variety of opportunities tailored just for you or let our AI help you!</p>
+    <div class="mt-4">
+      <button class="btn btn-orange btn-lg" (click)="openAiModal()">
+         Try with AI Now !
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="assets/front_office/assets/images/welcomeui.png" alt="Job Search" class="img-fluid">
+  </div>
+</div>
+
+
+<!-- AI Modal -->
+<div class="modal fade" id="aiModal" tabindex="-1" aria-labelledby="aiModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-4">
+      <div class="modal-header">
+        <h5 class="modal-title" id="aiModalLabel"> Personalized job filtering  with AI </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeAiModal()"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="lead">Drag & Drop your CV here <br>or Copy-Paste your text below </p>
+        
+        <!-- File Upload -->
+        <input type="file" (change)="onCvFileSelected($event)" class="form-control my-3" accept=".pdf,.doc,.docx">
+
+
+        <button class="btn btn-orange mt-4" (click)="submitCvToAi()">Send to AI 🚀</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Error Message -->
+<div *ngIf="errorMessage" class="alert alert-danger text-center">
+  <strong>Error!</strong> {{ errorMessage }}
+</div>
+
+<!-- No Job Offers Message -->
+<div *ngIf="!errorMessage && jobOffers.length === 0" class="alert alert-info text-center">
+  <strong>Notice!</strong> No job offers available at the moment.
+</div>
+<!-- filters -->
+<div class="filters-container classy-filters">
+  <div class="row align-items-center gx-2">
+  <!-- Location Filter -->
+<select class="form-select form-select-sm" [(ngModel)]="locationFilter" (ngModelChange)="applyFilters()">
+  <option value="">All Locations</option>
+  <option value="Remote">Remote</option>
+  <option value="On-site">On-site</option>
+  <option value="Hybrid">Hybrid</option>
+</select>
+
+<!-- Contract Type Filter -->
+<select class="form-select form-select-sm" [(ngModel)]="typeFilter" (ngModelChange)="applyFilters()">
+  <option value="">All Contract Types</option>
+  <option value="CDI">CDI</option>
+  <option value="CDD">CDD</option>
+</select>
+
+
+    <!-- Salary Range -->
+    <div class="col-md-5">
+      <div class="slider-wrapper">
+        <ngx-slider
+          [(value)]="minValue"
+          [(highValue)]="maxValue"
+          [options]="options"
+          (userChangeEnd)="applyFilters()"
+        ></ngx-slider>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- end  filter -->
+
+
+
+
+
+
+
+<!-- Toggle Button -->
+<div *ngIf="isShowingRecommendations" class="text-center mb-4">
+  <button class="btn btn-outline-secondary" (click)="goBackToAllOffers()">🔙 Back to All Offers</button>
+</div>
+<!-- Job Offers Grid -->
+<div *ngIf="!errorMessage && (filteredOffers.length > 0 || jobOffers.length > 0)" class="container">
+<!-- <div *ngIf="!errorMessage && jobOffers.length > 0" class="container"> old one full list -->
+
+  <div class="row">
+    <div *ngFor="let jobOffer of filteredOffers.length > 0 ? filteredOffers : jobOffers" class="col-md-6 mb-4">
+     <!-- <div *ngFor="let jobOffer of jobOffers" class="col-md-6 mb-4"> old one  -->
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title job-title">{{ jobOffer.title }}</h5>
+          <p class="card-text company-name"><strong>{{ jobOffer.company }}</strong></p>
+          <p class="text-muted location">{{ jobOffer.location }}</p>
+          <p class="description">{{ jobOffer.description }}</p>
+          <p class="text-muted location">{{ jobOffer.type }}</p>
+          <p class="text-muted location">Salary: {{ jobOffer.remuneration }}DNT</p>
+
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-orange btn-sm" [routerLink]="['/applyjob', jobOffer.id, jobOffer.title]">Apply Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recommended Jobs -->
+<div *ngIf="isShowingRecommendations && recommendedOffers.length > 0" class="container mt-5">
+  <h2 class="text-center mb-4">🎯 Jobs Recommended For You</h2>
+  <div class="row">
+    <div *ngFor="let jobOffer of recommendedOffers" class="col-md-6 mb-4">
+      <div class="card h-100 shadow-sm border-orange-300">
+        <div class="card-body">
+          <h5 class="card-title">{{ jobOffer.title }}</h5>
+          <p><strong>{{ jobOffer.company }}</strong></p>
+          <p class="text-muted">{{ jobOffer.location }}</p>
+          <p>{{ jobOffer.description }}</p>
+          <p class="text-muted location">{{ jobOffer.type }}</p>
+          <p class="text-muted location">Salary: {{ jobOffer.remuneration }}DNT</p>
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-orange btn-sm" [routerLink]="['/applyjob', jobOffer.id, jobOffer.title]">Apply Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,39 @@
+.planner-box {
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    background: #f9f9f9;
+  }
+  
+  .heatmap-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  
+  .heatmap-table th,
+  .heatmap-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .high {
+    background-color: #ff6b6b;
+    color: white;
+  }
+  
+  .medium {
+    background-color: #ffd93d;
+  }
+  
+  .low {
+    background-color: #8fd9a8;
+  }
+  
+  .suggestion-box {
+    margin-top: 20px;
+    padding: 12px;
+    background: #e8f5e9;
+    border-left: 6px solid #4caf50;
+  }
+  

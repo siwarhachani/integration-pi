@@ -1,0 +1,473 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+/* General Styles */
+:root {
+  --primary-color: #1976d2;
+  --light-gray: #f5f8fa;
+  --border-color: #e6e6e6;
+  --text-muted: #6c757d;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+}
+*{
+  /* font-family: "Darker Grotesque", sans-serif; */
+  font-family: "Anek Latin", sans-serif;
+
+  font-optical-sizing: auto;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #fafafa;
+}
+
+/* Feed Container */
+.feed-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+/* Tabs */
+.tabs-container {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.feed-tabs {
+  display: flex;
+  padding: var(--spacing-sm) 0;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  color: var(--primary-color);
+  position: relative;
+}
+
+.tab-btn.active:after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25%;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+/* Post Card */
+.post-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  margin-bottom: var(--spacing-lg);
+  overflow: hidden;
+  transition: all 0.2s;
+  border: 1px solid var(--border-color);
+}
+
+.post-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.author-name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.post-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.post-options .icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  padding: var(--spacing-sm);
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.post-options .icon-btn:hover {
+  background-color: var(--light-gray);
+}
+
+.post-preview {
+  padding: var(--spacing-md);
+  cursor: pointer;
+}
+
+.post-title {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-weight: 700;
+}
+
+.post-excerpt {
+  margin: 0;
+  color: #4a4a4a;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.post-image {
+  margin-top: var(--spacing-md);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Engagement Section */
+.post-engagement {
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.engagement-stats {
+  display: flex;
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-lg);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.engagement-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.engagement-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-muted);
+  padding: var(--spacing-sm);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.engagement-btn:hover {
+  background-color: var(--light-gray);
+  color: var(--primary-color);
+}
+
+.like-btn:hover {
+  color: #e0245e;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.modal-wrapper {
+  width: 90%;
+  max-width: 700px;
+  animation: modalFadeIn 0.3s;
+}
+
+.modal-content {
+  border: none;
+  overflow: hidden;
+  background: white;
+}
+
+.modal-header {
+  border: none;
+  padding: var(--spacing-md);
+}
+
+.modal-body {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Post Modal Styles */
+.post-modal-container {
+  padding: var(--spacing-md);
+}
+
+.post-content {
+  padding: var(--spacing-md) 0;
+}
+
+.post-text {
+  margin: var(--spacing-md) 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Comments Section */
+.comments-section {
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--spacing-lg);
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-subtitle {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comment-item {
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--spacing-md);
+}
+
+.comment-container {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.comment-avatar {
+  flex-shrink: 0;
+}
+
+.comment-content {
+  flex-grow: 1;
+}
+
+.comment-header {
+  margin-bottom: var(--spacing-sm);
+}
+
+.username {
+  font-weight: 600;
+  margin-right: var(--spacing-sm);
+}
+
+.comment-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.comment-text {
+  margin: 0 0 var(--spacing-sm) 0;
+  line-height: 1.5;
+}
+
+.comment-actions {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-muted);
+  padding: var(--spacing-sm) 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  color: var(--primary-color);
+}
+
+.delete-btn:hover {
+  color: #dc3545;
+}
+
+/* Reply Section */
+.replies-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-md) 0 0 3rem;
+}
+
+.reply-item {
+  margin-bottom: var(--spacing-md);
+}
+
+.reply-container {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.reply-content {
+  flex-grow: 1;
+  background-color: var(--light-gray);
+  padding: var(--spacing-md);
+  border-radius: 12px;
+}
+
+/* Reply Input */
+.reply-input-wrapper, .new-comment-section {
+  margin-top: var(--spacing-md);
+}
+
+.input-group {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+}
+
+.reply-input, .comment-input {
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  resize: none;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.reply-input:focus, .comment-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.reply-actions, .comment-submit-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  padding-left: calc(40px + var(--spacing-md));
+}
+
+.btn-subtle {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .feed-container {
+    padding: var(--spacing-sm);
+  }
+
+  .engagement-actions {
+    justify-content: space-around;
+  }
+
+  .engagement-btn span {
+    display: none;
+  }
+
+  .modal-wrapper {
+    width: 95%;
+  }
+
+}
+
+.vote-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.vote-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.vote-btn:hover {
+  color: #0d6efd;
+}
+
+.vote-count {
+  font-weight: 500;
+}
+
+.feed-tabs {
+  display: flex;
+  justify-content: flex-start; /* Or space-between, space-around, etc. */
+}
+
+.search-tab {
+  margin-left: auto;
+}
+
+
+img{
+  max-width: 100%;
+  height: auto;
+}

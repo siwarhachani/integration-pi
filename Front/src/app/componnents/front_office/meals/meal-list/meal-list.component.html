@@ -1,0 +1,36 @@
+<!-- Main Container -->
+<div class="container">
+  <button (click)="goBack()" class="back-button">Back</button>
+
+  <!-- Search Bar -->
+  <div class="search-wrapper">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search for meals..."
+      class="search-input"
+    />
+  </div>
+
+  <!-- Meals List -->
+  <div *ngFor="let meal of paginatedMeals()" class="meal-card">
+    <div (click)="toggleMealDetails(meal.food)" class="meal-card-header">
+      <span class="meal-name">{{ meal.food }}</span>
+    </div>
+
+    <div *ngIf="selectedMealId === meal.food" class="meal-card-details">
+      <app-meal-details [meal]="meal"></app-meal-details>
+    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination">
+    <button (click)="changePage(-1)" [disabled]="currentPage === 1" class="pagination-button">
+      Previous
+    </button>
+    <span class="pagination-info">Page {{ currentPage }} of {{ totalPages() }}</span>
+    <button (click)="changePage(1)" [disabled]="currentPage === totalPages()" class="pagination-button">
+      Next
+    </button>
+  </div>
+</div>

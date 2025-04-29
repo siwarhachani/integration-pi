@@ -1,0 +1,80 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+ integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Modal Background -->
+<div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content shadow">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-orange text-orange-50">
+        <h5 class="modal-title">Apply for {{ jobTitle }}</h5>
+        <button type="button" class="btn-close" (click)="goback()" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-12"> <!-- Full width inside modal -->
+              <div class="card-body">
+                <form [formGroup]="jobForm" (ngSubmit)="applyNow()" enctype="multipart/form-data">
+
+                  <div class="row">
+                   
+                    <div class="col-md-6 mb-3">
+                      <label for="fullName" class="form-label">Full Name</label>
+   <input type="text"
+       id="fullName"
+       formControlName="fullName"
+       class="form-control input-lg"
+       placeholder="Your full name"
+       required />
+
+
+                      <div *ngIf="jobForm.controls['fullName'].invalid && jobForm.controls['fullName'].touched" class="alert alert-danger">
+                        <p *ngIf="jobForm.controls['fullName'].hasError('required')">Full name is required</p>
+                      </div>
+                    </div> 
+                 
+
+
+                    <!-- Email -->
+                    <div class="col-md-6 mb-3">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" id="email" formControlName="email" class="form-control input-lg" placeholder="Your email" required>
+                      <div *ngIf="jobForm.controls['email'].invalid && jobForm.controls['email'].touched" class="alert alert-danger">
+                        <p *ngIf="jobForm.controls['email'].hasError('required')">Email is required</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- CV Upload -->
+                  <div class="mb-3">
+                    <label for="cv" class="form-label">Upload CV</label>
+                    <input type="file" id="cv" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" class="form-control file-input" required>
+                  </div>
+
+                  <!-- Cover Letter -->
+                  <div class="mb-4">
+                    <label for="coverLetter" class="form-label">Cover Letter</label>
+                    <textarea id="coverLetter" formControlName="coverLetter" class="form-control input-lg" placeholder="Write a brief cover letter" rows="5" required></textarea>
+                  </div>
+
+                  <!-- Apply Button -->
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-orange btn-lg">Apply Now</button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

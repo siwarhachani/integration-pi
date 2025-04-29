@@ -1,0 +1,122 @@
+<!-- Search and Add Button -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <input
+      type="text"
+      class="form-control w-50"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="applyFilter()"
+      placeholder="Search activity types..."
+    >
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-primary" (click)="openAddForm()">Add New Activity Type</button>
+    </div>
+  </div>
+  
+  <!-- Add/Edit Form -->
+  <div *ngIf="showForm" class="card p-4 mb-4">
+    <h4>{{ isEditing ? 'Edit Activity Type' : 'Add New Activity Type' }}</h4>
+  
+    <form (ngSubmit)="saveActivityType()">
+      <div class="form-group mb-2">
+        <label for="title">Title</label>
+        <input id="title" class="form-control" [(ngModel)]="formModel.title" name="title" required placeholder="Enter title">
+      </div>
+  
+      <div class="form-group mb-2">
+        <label for="type">Type</label>
+        <input id="type" class="form-control" [(ngModel)]="formModel.Type" name="Type" required placeholder="Enter type">
+      </div>
+  
+      <div class="form-group mb-2">
+        <label for="bodyPart">Body Part</label>
+        <input id="bodyPart" class="form-control" [(ngModel)]="formModel.BodyPart" name="BodyPart" placeholder="Enter body part">
+      </div>
+  
+      <div class="form-group mb-2">
+        <label for="equipment">Equipment</label>
+        <input id="equipment" class="form-control" [(ngModel)]="formModel.Equipment" name="Equipment" placeholder="Enter equipment">
+      </div>
+  
+      <div class="form-group mb-2">
+        <label for="level">Level</label>
+        <input id="level" class="form-control" [(ngModel)]="formModel.Level" name="Level" placeholder="Enter level">
+      </div>
+  
+      <div class="form-group mb-2">
+        <label for="rating">Rating</label>
+        <input id="rating" type="number" class="form-control" [(ngModel)]="formModel.Rating" name="Rating" min="0" max="5" placeholder="Enter rating (0-5)">
+      </div>
+  
+      <div class="form-group mb-2">
+        <label for="ratingDesc">Rating Description</label>
+        <textarea id="ratingDesc" class="form-control" [(ngModel)]="formModel.RatingDesc" name="RatingDesc" placeholder="Enter rating description"></textarea>
+      </div>
+  
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success">{{ isEditing ? 'Update' : 'Create' }}</button>
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Table List -->
+  <table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Body Part</th>
+        <th>Equipment</th>
+        <th>Level</th>
+        <th>Rating</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let type of paginatedActivityTypes">
+            <td>{{ type.title }}</td>
+            <td>{{ type.Type }}</td>      <!-- Correction ici -->
+            <td>{{ type.BodyPart }}</td>   <!-- Correction ici -->
+            <td>{{ type.Equipment }}</td>  <!-- Correction ici -->
+            <td>{{ type.Level }}</td>      <!-- Correction ici -->
+            <td>{{ type.Rating }}</td>     <!-- Correction ici -->
+          
+            <td>
+              <button class="btn btn-sm btn-warning me-2" (click)="openEditForm(type)">Edit</button>
+              <button class="btn btn-sm btn-danger" (click)="deleteActivityType(type.actTypeId)">Delete</button>
+            </td>
+          </tr>
+          
+    </tbody>
+  </table>
+  <div>
+   
+  </div>
+  
+  
+  <!-- Pagination Controls -->
+  <nav *ngIf="filteredActivityTypes.length > itemsPerPage">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+      </li>
+  
+      <li
+        class="page-item"
+        *ngFor="let page of pages"
+        [class.active]="currentPage === page"
+      >
+        <button class="page-link" (click)="changePage(page)">{{ page }}</button>
+      </li>
+  
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+      </li>
+    </ul>
+  </nav>
+  
+  <!-- No Result Message -->
+  <div *ngIf="filteredActivityTypes.length === 0" class="text-center mt-5">
+    <p>No activity types match your search.</p>
+  </div>
+  

@@ -1,0 +1,120 @@
+
+  
+    <script src="../assets/js/jquery-2.1.0.min.js"></script>
+    <!-- Bootstrap -->
+ <script src="../assets/js/popper.js"></script>
+ <script src="../assets/js/bootstrap.min.js"></script>
+ 
+ <!-- Plugins -->
+ <script src="../assets/js/owl-carousel.js"></script>
+ <script src="../assets/js/scrollreveal.min.js"></script>
+ <script src="../assets/js/waypoints.min.js"></script>
+ <script src="../assets/js/jquery.counterup.min.js"></script>
+ <script src="../assets/js/imgfix.min.js"></script>
+ 
+ <!-- Global Init -->
+ <script src="../assets/js/custom.js"></script>
+ <header class="header-area header-sticky">
+   <div class="container">
+       <div class="row">
+           <div class="col-12">
+               <nav class="main-nav">
+                   <!-- ***** Logo Start ***** -->
+                   <a href="../home/home.component.html" class="logo">
+                      
+                   </a>
+                   <!-- ***** Logo End ***** -->
+                   <!-- ***** Menu Start ***** -->
+                   <ul class="nav">
+                       <li class="scroll-to-section"><a href="#welcome" class="menu-item">Home</a></li>
+                       <li class="scroll-to-section"><a href="#about" class="menu-item">About</a></li>
+                       <li class="nav-item"><a class="menu-item" routerLink="/listoffers">Jobs</a></li>
+                       <li class="nav-item"><a class="menu-item" routerLink="/user-events">Events</a></li>
+                       <li class="submenu">
+                        <a href="javascript:;">Posts</a>
+                        <ul>
+                          <li><a href="/posts" class="menu-item">Posts</a></li>
+                            <li><a href="/my-posts" class="menu-item">My posts</a></li>
+                          
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                      <a href="javascript:;">Marketplace</a>
+                      <ul>
+                        <li><a href="/product-list" class="menu-item">Marketplace</a></li>
+                          <li><a href="/cart" class="menu-item">Cart</a></li>
+                        
+                      </ul>
+                  </li>
+                       <li class="submenu">
+                           <a href="javascript:;">Health</a>
+                           <ul>
+                             <li><a href="/ingredient" class="menu-item">Meals</a></li>
+                               <li><a href="/ListActivity" class="menu-item">Activities</a></li>
+                             
+                           </ul>
+                       </li>
+                       
+                       <li> <div class="d-flex">
+                        <!-- If not logged in -->
+                        <button class="btn-login" type="button" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
+                        <button class="btn-register" type="button" *ngIf="!isLoggedIn" routerLink="/register">Register</button>
+                  
+                        <!-- If logged in -->
+                        <div *ngIf="isLoggedIn" class="d-flex align-items-center position-relative">
+                          <!-- Profile Photo -->
+                          <img
+                            [src]="userPhotoUrl ? userPhotoUrl : 'assets/static_assets/user.png'"
+                            alt="User Photo"
+                            class="rounded-circle me-2"
+                            width="40"
+                            height="40"
+                            (click)="toggleDropdown()"
+                            style="cursor: pointer;">
+                  
+                          <!-- Dropdown -->
+                          <div *ngIf="isDropdownOpen"
+                               class="position-absolute bg-white shadow rounded p-3"
+                               style="top: 50px; right: 0; min-width: 200px; z-index: 1000;">
+                  
+                            <!-- User Info -->
+                            <div class="mb-2">
+                              <span class="fw-bold d-block">{{ username }}</span>
+                              <span class="text-muted small">{{ role }}</span>
+                            </div>
+                  
+                            <hr class="my-2">
+                            <a class="dropdown-item text-start w-100 btn btn-sm mb-1"
+                               [routerLink]="['/profile', '@' + username]">
+                  
+                            Profile
+                            </a>
+                            <!-- Edit Profile -->
+                            <a class="dropdown-item text-start w-100 btn btn-sm mb-1"
+                               routerLink="/profile-update">
+                              Edit Profile
+                            </a>
+                  
+                            <!-- Logout -->
+                            <button class="dropdown-item text-start w-100 btn btn-sm btn-outline-danger"
+                                    (click)="logout()">
+                              Logout
+                            </button>
+                          </div>
+                        </div>
+                      </div></li>
+                   </ul>
+                   <a class='menu-trigger'>
+                       <span>Menu</span>
+                   </a>
+                   <!-- ***** Menu End ***** -->
+               </nav>
+           </div>
+       </div>
+   </div>
+ <header>
+ 
+ 
+ 
+ <!-- ***** Header Area End ***** -->
+ 

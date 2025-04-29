@@ -1,0 +1,29 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div>
+      <label>Nom :</label>
+      <input class="form-control" type="text" placeholder="Nom du produit" formControlName="name">
+    </div>
+  
+    <div>
+      <label>Description :</label>
+      <textarea class="form-control" placeholder="Description du produit" formControlName="description"></textarea>
+    </div>
+  
+    <div>
+      <label>Prix :</label>
+      <input class="form-control" type="number" placeholder="Prix" formControlName="price">
+    </div>
+  
+    <div>
+      <label>Quantité :</label>
+      <input class="form-control" type="number" placeholder="Quantité" formControlName="quantity">
+    </div>
+  
+    <div>
+      <label>Image :</label>
+      <input type="file" (change)="onFileSelected($event)" class="form-control">
+    </div>
+  
+    <button type="submit" [disabled]="productForm.invalid">Mettre à jour le produit</button>
+  </form>
+  

@@ -1,0 +1,10 @@
+<div class="container my-4">
+  <div class="card shadow-sm">
+    <app-post-modal
+      *ngIf="post"
+      [post]="post"
+      [inPage]="true"
+      (close)="goBack()"
+    ></app-post-modal>
+  </div>
+</div>

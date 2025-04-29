@@ -1,0 +1,148 @@
+@import url("../images/css.css");
+
+/* Reset */
+*{
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Layout */
+.container {
+  display: flex; /* ✅ Horizontal layout */
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 80px; /* Sidebar width */
+  background-color: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 10px;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1; /* ✅ Take all available width */
+  padding: 10px 30px; /* ✅ Small padding only inside */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Banner Cards */
+.banner {
+  background: #ccc;
+  width: 190%; /* ✅ Fill ALL width after sidebar */
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 30px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  min-height: 100px;
+  transition: transform 0.3s ease;
+  margin-right:40px;
+  margin-left:30px;
+}
+
+/* Hover effect */
+.banner:hover {
+  transform: scale(1.01);
+}
+
+/* Text Content */
+.banner .text-content {
+  width: 60%;
+}
+.banner h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #ffffff; /* ✅ Make title white */
+  }
+  
+  .banner p {
+    font-size: 14px;
+    opacity: 0.9;
+    color: #ffffff; /* ✅ Make paragraph white */
+  }
+  
+
+/* Image Content */
+.banner .image-content {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.banner .image-content img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 10px;
+}
+.green-banner {
+    background: linear-gradient(to right, #66BB6A, #43A047); /* Light fresh green for Workout */
+  }
+  
+  .orange-banner {
+    background: linear-gradient(to right, #FFA726, #FB8C00); /* Bright vibrant orange for Diet */
+  }
+  
+  .clay-banner {
+    background: linear-gradient(to right, #FF8F00, #EF6C00); /* Deeper warm clay orange for Team */
+  }
+  
+  .beige-banner {
+    background: linear-gradient(to right, #FFD180, #FFAB40); /* Soft lively light orange for Discussions */
+  }
+  
+  .red-banner {
+    background: linear-gradient(to right, #EF5350, #E53935); /* Action red-orange for Products */
+  }
+  
+  .sand-banner {
+    background: linear-gradient(to right, #FFE0B2, #FFCC80); /* Warm soft sand for Events */
+  }
+  
+/* Responsive (Tablet and Mobile) */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .banner .text-content,
+  .banner .image-content {
+    width: 100%;
+  }
+
+  .banner .image-content {
+    margin-top: 12px;
+    justify-content: center;
+  }
+
+  .banner .image-content img {
+    max-width: 60px;
+  }
+}

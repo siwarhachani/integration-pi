@@ -1,0 +1,38 @@
+
+<div style="max-width: 1200px;margin: 0 auto;"> 
+
+<div *ngFor="let category of groupedIngredients | keyvalue" style="margin-top: 70px;" >
+  <div class="category">
+    <h3>
+      {{ category.key }}
+      <span>{{ getSelectedCount(category.key) }}/{{ category.value.length }} Ingredients</span>
+    </h3>
+
+    <div class="ingredient-container">
+      <button
+        *ngFor="let ingredient of visibleIngredients(category.value, category.key)"
+        (click)="toggleSelection(ingredient)"
+        [ngClass]="{ 'selected': isSelected(ingredient) }"
+      >
+        {{ ingredient.food }}
+      </button>
+    </div>
+
+    <button class="show-more" (click)="toggleShowMore(category.key)">
+      <span *ngIf="!isExpanded(category.key)">+ Show more</span>
+      <span *ngIf="isExpanded(category.key)">– Show less</span>
+    </button>
+  </div>
+</div>
+
+<button (click)="generateMeals()" [disabled]="loading" class="generate-button">
+  {{ loading ? 'Generating...' : 'Generate Meals' }}
+</button>
+
+<div *ngIf="generatedMeals" class="generated-output">
+    <button class="copy-btn" (click)="copyToClipboard()">📋 Copy</button>
+    <pre>{{ generatedMeals }}</pre>
+  </div>
+  
+</div>
+

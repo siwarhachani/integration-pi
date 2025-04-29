@@ -1,0 +1,29 @@
+<div class="container mt-4" style="max-width: 600px;margin:0 auto;">
+  <h2 class="mb-4 fw-semibold">My Posts</h2>
+
+  <div *ngIf="posts.length === 0" class="alert alert-info">No posts found.</div>
+
+  <div class="list-group">
+    <div
+      *ngFor="let post of posts"
+      class="list-group-item d-flex justify-content-between align-items-center flex-wrap gap-2 py-3 border rounded-3 shadow-sm mb-2 bg-white"
+    >
+      <div class="flex-grow-1">
+        <h5 class="mb-1 text-dark fw-semibold">{{ post.title }}</h5>
+        <div class="text-muted small">{{ post.createdAt | date:'mediumDate' }}</div>
+      </div>
+
+      <button class="btn btn-sm btn-outline-primary" (click)="viewPost(post.id)">
+        View Post
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  .list-group-item:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease-in-out;
+  }
+</style>

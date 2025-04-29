@@ -1,0 +1,42 @@
+<div class="container mt-4">
+    <h2>Votre Panier</h2>
+  
+    <div *ngIf="cart.items.length === 0">
+      <p>Votre panier est vide.</p>
+    </div>
+  
+    <div *ngIf="cart.items.length > 0">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of cart.items">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+             <!-- <img [src]="'assets/images/' + item.product.imageUrl" alt="Product Image" style="width: 50px; height: 50px;">-->
+              {{ item.product.name }} - {{ item.quantity }} x {{ item.product.price }} $
+            </div>
+            <button class="btn btn-danger btn-sm" (click)="removeItem(item.id!)">Retirer</button>
+          </div>
+        </li>
+      </ul>
+  
+      <div class="mt-3">
+        <h4>Total : {{ total | currency:'USD' }}</h4>
+        <h4>Total en TND : {{ totalInUSD | currency:'TND' }}</h4>  <!-- Affichage du total en USD -->
+          <button class ="btn btn-success btn-sm"(click)="valider()">Valider le panier</button>
+          <p *ngIf="cart.discount > 0"><strong>Remise :</strong> {{ cart.discount }} $</p>
+          <p><strong>À payer :</strong> {{ cart.totalPrice - cart.discount }} $</p>
+
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="similarProducts.length > 0">
+  <h3>🔁 Vous pourriez aussi aimer :</h3>
+  <ul>
+    <li *ngFor="let product of similarProducts">
+      <strong>{{ product.name }}</strong> - {{ product.price }} DA
+      <p>{{ product.description }}</p>
+    </li>
+  </ul>
+</div>
+
+

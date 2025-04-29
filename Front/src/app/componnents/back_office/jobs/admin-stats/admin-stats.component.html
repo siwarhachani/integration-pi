@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+ integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="dashboard-container">
+  <div class="chart-card">
+    <canvas baseChart
+            [data]="jobOffersData"
+            [options]="chartOptions"
+            [type]="'doughnut'">
+    </canvas>
+  </div>
+
+  <div class="chart-card">
+    <canvas baseChart
+            [data]="applicationsData"
+            [options]="chartOptions"
+            [type]="'doughnut'">
+    </canvas>
+  </div>
+
+
+<!--<div class="popular-job">
+  <h3>🔥 Most Popular Job Title: {{ mostPopularJobTitle }}</h3>
+</div>-->
+
+<div class="charts-container">
+    <canvas baseChart 
+      [data]="applicationTrendData" 
+      [options]="chartOptions"
+      [type]="'line'">
+    </canvas>
+</div>
+<div class="charts-container">
+    <canvas baseChart 
+      [data]="applicationsByJobTitleData" 
+      [options]="chartOptions"
+      [type]="'bar'">
+    </canvas>
+</div>
+<div class="charts-pred-container">
+
+  <h3>Predicted Applications for the next 7 days</h3>
+  <canvas id="myChart"></canvas>
+</div>
+</div>
+
+

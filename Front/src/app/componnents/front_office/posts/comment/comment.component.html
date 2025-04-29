@@ -1,0 +1,130 @@
+<h5 class="section-title mb-4">Comments</h5>
+
+<ul class="comments-list">
+  <li *ngFor="let comment of comments" class="comment-item">
+
+
+    <div class="comment-container">
+      <div class="comment-avatar">
+        <img src="https://picsum.photos/40" alt="avatar" class="rounded-circle">
+      </div>
+      <div class="comment-content">
+        <div class="comment-header">
+          <span class="username" [routerLink]="['/profile', '@' + comment.authorUsername]">{{ comment.authorUsername }}</span>
+          <span class="comment-time">{{ comment.createdAt | date:'short' }}</span>
+        </div>
+        <p class="comment-text">{{ comment.content }}</p>
+
+        <div class="comment-actions">
+          <div class="vote-buttons">
+            <button  [ngClass]="{ 'text-success': comment.userVote === 'UPVOTE' }" class="vote-btn upvote" (click)="voteOnComment(comment, 'UPVOTE')">
+              <i class="fas fa-arrow-up"></i>
+            </button>
+            <span class="vote-count">{{ getVoteCount(comment) }}</span>
+            <button  [ngClass]="{ 'text-danger': comment.userVote === 'DOWNVOTE' }" class="vote-btn downvote" (click)="voteOnComment(comment, 'DOWNVOTE')">
+              <i class="fas fa-arrow-down"></i>
+            </button>
+          </div>
+
+          <button class="action-btn reply-btn" (click)="showReply(comment.id!)">
+            <i class="bi bi-chat">💬</i>
+            <span>Reply</span>
+          </button>
+          <button *ngIf="canEditOrDelete(comment)" class="action-btn delete-btn" (click)="deleteComment(comment.id!)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+
+        <div *ngIf="showReplyInput[comment.id!]" class="reply-input-wrapper">
+          <form [formGroup]="replyForms[comment.id!]" (ngSubmit)="addReply(comment.id!)">
+            <div class="input-group">
+              <img src="https://picsum.photos/32" alt="user avatar" class="rounded-circle me-2">
+              <textarea class="form-control reply-input" formControlName="text" placeholder="Write a reply..."></textarea>
+            </div>
+            <div class="reply-actions">
+              <button type="button" class="btn btn-subtle" (click)="showReply(comment.id!)">Cancel</button>
+              <button type="submit" class="btn btn-primary">Reply</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <ul *ngIf="comment.replies && comment.replies.length > 0" class="replies-list">
+      <li *ngFor="let reply of comment.replies" class="reply-item">
+        <div class="reply-container">
+          <div class="comment-avatar">
+            <img src="https://picsum.photos/40" alt="avatar" class="rounded-circle">
+          </div>
+          <div class="reply-content">
+            <div class="comment-header">
+              <span class="username" [routerLink]="['/profile', '@' + reply.authorUsername]">{{ reply.authorUsername }}</span>
+              <span class="comment-time">{{ reply.createdAt | date:'short' }}</span>
+            </div>
+            <p class="comment-text">{{ reply.content }}</p>
+
+            <div class="comment-actions">
+              <div class="vote-buttons">
+                <button [ngClass]="{ 'text-success': reply.userVote === 'UPVOTE' }" class="vote-btn upvote" (click)="voteOnComment(reply, 'UPVOTE')">
+                  <i [class]="{
+                    'fas': true,
+                    'fa-arrow-up': true,
+                    'text-success': reply.userVote === 'UPVOTE'
+                  }"></i>
+                </button>
+                <span class="vote-count">{{ getVoteCount(reply) }}</span>
+                <button [ngClass]="{ 'text-danger': reply.userVote === 'DOWNVOTE' }" class="vote-btn downvote" (click)="voteOnComment(reply, 'DOWNVOTE')">
+                  <i [class]="{
+                    'fas': true,
+                    'fa-arrow-down': true,
+                    'text-danger': reply.userVote === 'DOWNVOTE'
+                  }"></i>
+                </button>
+              </div>
+
+              <button *ngIf="canEditOrDelete(reply)" class="action-btn delete-btn" (click)="deleteComment(reply.id!)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="new-comment-section" id="comment" #commentSection>
+  <h6 class="section-subtitle">Add a Comment</h6>
+  <form [formGroup]="newCommentForm" (ngSubmit)="addComment()">
+    <div class="input-group" style="flex-wrap: nowrap;">
+      <img src="https://picsum.photos/40" alt="user avatar" class="rounded-circle me-2">
+      <div style="flex-grow:1;">
+        <textarea id="comment-box" class="form-control comment-input" formControlName="text" placeholder="Share your thoughts..."></textarea>
+      <div *ngIf="isLoadingSuggestions" class="text-sm text-gray-400">Loading suggestions...</div>
+
+        <div *ngIf="suggestions.length > 0" class="flex flex-wrap" style="margin-top: 0.5rem">
+          <button
+            *ngFor="let suggestion of suggestions"
+            (click)="useSuggestion(suggestion)"
+            style="
+          background: #f5f8fa;
+              border: 1px solid #ccc;
+              margin: 0rem 18px 0.5rem 0;
+                  border-radius: 2rem;
+">
+            {{ suggestion }}
+          </button>
+        </div>
+    </div>
+
+
+
+
+    </div>
+
+    <div class="comment-submit-container">
+
+      <button type="submit" class="btn btn-primary">Comment</button>
+    </div>
+  </form>
+</div>

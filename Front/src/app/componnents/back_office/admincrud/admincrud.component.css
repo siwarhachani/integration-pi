@@ -1,0 +1,131 @@
+/* General */
+body {
+    background-color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Search and Add Section */
+  .d-flex input.form-control {
+    border: 2px solid #ff7f50;
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  
+  .d-flex button.btn-primary {
+    background-color: #ff7f50;
+    border-color: #ff7f50;
+    border-radius: 8px;
+    padding: 8px 20px;
+    transition: 0.3s;
+  }
+  
+  .d-flex button.btn-primary:hover {
+    background-color: #ff5722;
+    border-color: #ff5722;
+  }
+  
+  /* Form Card */
+  .card {
+    border: 1px solid #ff7f50;
+    border-radius: 12px;
+    background-color: #fff3e6;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  .card h4 {
+    color: #ff5722;
+    margin-bottom: 20px;
+  }
+  
+  form .form-group label {
+    font-weight: 600;
+    color: #ff5722;
+  }
+  
+  form .form-control {
+    border: 1px solid #ff7f50;
+    border-radius: 6px;
+  }
+  
+  /* Submit & Cancel Buttons */
+  form .btn-success {
+    background-color: #ff7f50;
+    border-color: #ff7f50;
+    border-radius: 6px;
+  }
+  
+  form .btn-success:hover {
+    background-color: #ff5722;
+    border-color: #ff5722;
+  }
+  
+  form .btn-secondary {
+    background-color: #ffffff;
+    color: #ff5722;
+    border: 2px solid #ff5722;
+    border-radius: 6px;
+  }
+  
+  form .btn-secondary:hover {
+    background-color: #ff5722;
+    color: #ffffff;
+  }
+  
+  /* Table */
+  .table {
+    border: 1px solid #ff7f50;
+  }
+  
+  .table thead {
+    background-color: #ff7f50;
+    color: white;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #ffe5d0;
+  }
+  
+  /* Action Buttons */
+  .btn-warning {
+    background-color: #ffb347;
+    border-color: #ffb347;
+  }
+  
+  .btn-warning:hover {
+    background-color: #ff9800;
+    border-color: #ff9800;
+  }
+  
+  .btn-danger {
+    background-color: #ff6347;
+    border-color: #ff6347;
+  }
+  
+  .btn-danger:hover {
+    background-color: #e53935;
+    border-color: #e53935;
+  }
+  
+  /* Pagination */
+  .pagination .page-link {
+    color: #ff7f50;
+    border: 1px solid #ff7f50;
+  }
+  
+  .pagination .page-item.active .page-link {
+    background-color: #ff7f50;
+    border-color: #ff7f50;
+    color: white;
+  }
+  
+  .pagination .page-link:hover {
+    background-color: #ffe5d0;
+  }
+  
+  /* No Result Message */
+  .text-center p {
+    color: #ff5722;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  

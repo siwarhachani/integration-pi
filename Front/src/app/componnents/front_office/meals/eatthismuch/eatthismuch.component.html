@@ -1,0 +1,77 @@
+
+<form [formGroup]="macroForm" class="macro-form">
+    <label style="margin-top: 70px;margin-left:200px ;">
+      Total Calories:
+      <input type="number" formControlName="totalCalories" style="width: 200px;">
+    </label>
+  
+    <div class="top-summary" [class.over]="isOverLimit">
+     {{ totalPercent | number:'1.0-0' }}%
+     
+      <div *ngIf="isOverLimit" class="warning">⚠️ You've exceeded your calorie target!</div>
+    </div>
+  
+    <div class="macro-sliders">
+      <div *ngFor="let m of macroKeys" class="slider-container">
+        <div class="macro-top">
+          <strong>{{ m | titlecase }}</strong><br />
+          {{ percentages[m] | number:'1.0-0' }}% —
+          {{ grams[m] | number:'1.0-1' }} g
+        </div>
+  
+        <div class="bar-wrapper">
+          <div class="bar-track">
+            <div class="bar-fill" [style.height]="barHeight(m)" [style.background]="colors[m]"></div>
+          </div>
+  
+          <input
+          orient="vertical"
+          type="range"
+          [min]="0"
+          [max]="totalCalories"
+          [step]="totalCalories * 0.05"
+          [formControlName]="m + 'Calories'"
+          class="vertical-slider"
+        />
+        
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <button (click)="generateMealPlan()" class="custom-upload-btn" >
+    Generate
+  </button>
+  
+  <div *ngFor="let category of groupedIngredients | keyvalue" class="mb-8">
+    <h2>{{ category.key }}</h2>
+  
+    <table class="ingredient-table">
+      <thead>
+        <tr>
+          <th>Food</th>
+          <th>Calories</th>
+          <th>Quantity</th>
+          <th>Protein (g)</th>
+          <th>Carbs (g)</th>
+          <th>Fat (g)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ingredient of category.value">
+          <td>{{ ingredient.food }}</td>
+          <td>{{ ingredient.calories }}</td>
+          <td>{{ ingredient.measure }}</td>
+          <td>{{ ingredient.protein }}</td>
+          <td>{{ ingredient.carbs }}</td>
+          <td>{{ ingredient.fat }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
+
+
+  

@@ -1,0 +1,67 @@
+<div class="post-modal-container">
+
+
+
+
+
+  <div class="post-header">
+    <div class="author-info">
+      <img src="https://picsum.photos/48" alt="author avatar" class="rounded-circle">
+      <div>
+        <h6 class="author-name">{{ post.authorUsername || 'Anonymous' }}</h6>
+        <span class="post-time">{{ post.createdAt | date:'medium' }}</span>
+      </div>
+    </div>
+
+    <div *ngIf="canEditOrDelete(post)" class="dropdown">
+      <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+          <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+        </svg>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item bg-danger" (click)="deletePost(post.id)">🗑️ Delete</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="post-content">
+    <h2 class="post-title">{{ post.title }}</h2>
+    <p class="post-text" [innerHTML]="post.content"></p>
+
+
+  </div>
+
+  <div class="post-engagement">
+    <div class="engagement-actions">
+      <div class="vote-buttons">
+        <button [ngClass]="{ 'text-success': post.userVote === 'UPVOTE' }" class="vote-btn upvote" (click)="handleVote('UPVOTE')">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+        <span class="vote-count">{{ post.upvoteCount - post.downvoteCount }}</span>
+        <button [ngClass]="{ 'text-danger': post.userVote === 'DOWNVOTE' }" class="vote-btn downvote" (click)="handleVote('DOWNVOTE')">
+          <i class="fas fa-arrow-down"></i>
+        </button>
+      </div>
+
+      <button class="engagement-btn" (click)="scrollToCommentSection()">
+        <i class="bi bi-chat">💬</i>
+        <span>Comment</span>
+      </button>
+      <button class="engagement-btn" (click)="copyLink(post.id)">
+        <i class="bi bi-arrow-repeat">🔗</i>
+        <span>Copy link</span>
+      </button>
+    </div>
+
+
+
+
+
+    </div>
+
+  <div class="comments-section">
+    <app-comment [postId]="post.id" [articleText]="post.content"></app-comment>
+  </div>
+</div>

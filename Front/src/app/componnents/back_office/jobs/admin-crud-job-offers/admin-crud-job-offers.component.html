@@ -1,0 +1,261 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+ integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- partial:index.partial.html -->
+<div class="dashboard">
+  <div class="ui-row-1">
+    <div class="logo-comp">
+        <p style="color: black;">WELL <a style="color: orange;">U</a></p>
+    </div>
+    <div class="search">
+        <input type="search" id="search" name="search" placeholder="Search...">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg>
+    </div>
+    <div class="profile">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+            <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+        </svg>
+    </div>
+</div>
+
+          <div class="ui-row-2">
+            <div class="left-sidebar">
+  
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                </svg>
+              </div>
+    
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                </svg>
+              </div>
+    
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                  <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z" />
+                  <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z" />
+                </svg>
+              </div>
+    
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
+                  <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z" />
+                </svg>
+              </div>
+    
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16" [routerLink]="['/admin/offers']">
+                  <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                  <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                </svg>
+              </div>
+    
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                  <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                  <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
+                </svg>
+              </div>
+    
+            </div>
+
+            <div class="admin-container">
+              <h2>Job Offers</h2>
+            
+              <!-- Job Offers Table -->
+              <table>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Remuneration</th>
+                    <th>Type of Contract</th>
+                    <th>Actions</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <!--<tr *ngFor="let jobOffer of jobOffers">-->
+                    <tr *ngFor="let jobOffer of paginatedjobOffers; let i = index">
+
+                    <td>{{ jobOffer.title }}</td>
+                    <td>{{ jobOffer.description }}</td>
+                    <td>{{ jobOffer.company }}</td>
+                    <td>{{ jobOffer.location }}</td>
+                    <td>{{ jobOffer.status }}</td>
+                    <td>{{ jobOffer.remuneration }}</td>
+                    <td>{{ jobOffer.type }}</td>
+
+
+                    <td><button class="edit-btn" (click)="editJobOffer(jobOffer)">🖋 Edit</button>
+                      <button class="delete-btn" (click)="deleteJobOffer(jobOffer.id)">🗑️ Delete</button>
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            <!-- Pagination centered under the table -->
+            <div class="d-flex justify-content-center mt-3">
+              <nav *ngIf="jobOffers.length > itemsPerPage">
+                <ul class="pagination">
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+                  </li>
+                  <li
+                    class="page-item"
+                    *ngFor="let page of totalPages"
+                    [class.active]="currentPage === page">
+                    <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                    <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+              <button (click)="toggleAddForm()" class="btn-add">➕ Add Job Offer</button>
+            
+              <!-- Add Job Offer Form -->
+              <div *ngIf="addingJobOffer" class="job-form">
+                <h3>Add Job Offer</h3>
+                <form [formGroup]="jobForm" (ngSubmit)="addJobOffer()">
+                  <label>Title</label>
+                  <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                  <div *ngIf="jobForm.controls['title'].invalid && jobForm.controls['title'].touched" class="alert alert-danger">
+                    <p *ngIf="jobForm.controls['title'].hasError('required')">Title is required</p>
+                    <p *ngIf="jobForm.controls['title'].hasError('minlength')">Must be at least 4 characters</p>
+                  </div>
+            
+                  <label>Description</label>
+                  <input type="text" class="form-control" formControlName="description" placeholder="Description">
+                  <div *ngIf="jobForm.controls['description'].invalid && jobForm.controls['description'].touched" class="alert alert-danger">
+                    <p *ngIf="jobForm.controls['description'].hasError('required')">Description is required</p>
+                  </div>
+            
+                  <label>Location</label>
+                  <select class="form-control" formControlName="location">
+                    <option value="" disabled>Select Location</option>
+                    <option value="Remote">Remote</option>
+                    <option value="On-site">On-site</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                  <div *ngIf="jobForm.controls['location'].invalid && jobForm.controls['location'].touched" class="alert alert-danger">
+                    <p>Location is required</p>
+                  </div>
+
+                  <label>Type of Contract</label>
+                  <select class="form-control" formControlName="type">
+                    <option value="" disabled>Select Type</option>
+                    <option value="CDD">CDD</option>
+                    <option value="CDI">CDI</option>
+                  </select>
+                  <div *ngIf="jobForm.controls['location'].invalid && jobForm.controls['location'].touched" class="alert alert-danger">
+                    <p>Location is required</p>
+                  </div>
+
+
+
+
+
+
+            
+                  <label>Status</label>
+                  <select class="form-control" formControlName="status">
+                    <option value="Open">Open</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+            
+                  <label>Keywords</label>
+                  <input type="text" class="form-control" formControlName="keywords" placeholder="Keywords">
+                  <div *ngIf="jobForm.controls['keywords'].invalid && jobForm.controls['keywords'].touched" class="alert alert-danger">
+                    <p *ngIf="jobForm.controls['keywords'].hasError('required')">Keywords is required</p>
+                    <p *ngIf="jobForm.controls['keywords'].hasError('minlength')">Should at least contain 5 words</p>
+                  </div>
+
+                  
+                   
+                  <label>Remuneration</label>
+                  <input type="text" class="form-control" formControlName="remuneration" placeholder="remuneration">
+                  <div *ngIf="jobForm.controls['remuneration'].invalid && jobForm.controls['remuneration'].touched" class="alert alert-danger">
+                    <p *ngIf="jobForm.controls['remuneration'].hasError('required')">remuneration is required</p>
+                  </div>
+
+
+                  
+
+                  <button type="submit" [disabled]="jobForm.invalid">Add</button>
+                </form>
+              </div>
+            
+               <!-- Edit Job Offer Form -->
+               <div *ngIf="editingJobOffer" class="edit-form">
+                <h3>Edit Job Offer</h3>
+                <form [formGroup]="editJobForm" (ngSubmit)="updateJobOffer()">
+                  <label>Title</label>
+                  <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                  
+                  <label>Description</label>
+                  <input type="text" class="form-control" formControlName="description" placeholder="Description">
+                  
+                  <label>Company</label>
+                  <input type="text" class="form-control" formControlName="company" placeholder="Company">
+                  
+                  <label>Location</label>
+                  <select class="form-control" formControlName="location">
+                    <option value="Remote">Remote</option>
+                    <option value="On-site">On-site</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                  
+
+                  <label>Status</label>
+                  <select class="form-control" formControlName="status">
+                    <option value="Open">Open</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+
+         
+                  <label>Type of Contract</label>
+                  <select class="form-control" formControlName="type">
+                    <option value="CDD">CDD</option>
+                    <option value="CDI">CDI</option>
+                  </select>
+
+
+
+
+                  
+                     
+                  <label>Remuneration</label>
+                  <input type="text" class="form-control" formControlName="remuneration" placeholder="remuneration">
+                 
+
+
+                  <button type="submit" >Update</button>
+                </form>
+              </div>
+            </div>
+            
+                  
+              </div>
+              
+            </div>
+            
+
